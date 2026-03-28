@@ -6,12 +6,6 @@
 'use strict';
 
 // ==========================================
-// CONSTANTS
-// ==========================================
-// Derived after ALPHABET_DATA is defined below; referenced throughout the file.
-// Use ALPHA_LEN instead of the magic number 26 everywhere.
-
-// ==========================================
 // DATA
 // ==========================================
 
@@ -108,7 +102,8 @@ const TRACE_MESSAGES = [
   'Super work! 🦸', 'Well done! 🥳',
 ];
 
-// Derived constant — use instead of the magic number 26
+// Derived constant — use instead of the magic number 26.
+// Defined here (after ALPHABET_DATA) so it is always in sync with the array.
 const ALPHA_LEN = ALPHABET_DATA.length;
 
 const BADGES = [
@@ -438,23 +433,23 @@ function initTraceScreen() {
 }
 
 function setupDrawEvents(canvas) {
-  // Cloning the canvas is the simplest way to remove all previously attached
-  // event listeners at once (avoids storing and passing references for each
-  // individual listener when the trace screen is re-entered).
-  const fresh = canvas.cloneNode(true);
-  canvas.parentNode.replaceChild(fresh, canvas);
-  const dc = fresh;
-  drawCtx = dc.getContext('2d');
+  // Use AbortController so all listeners can be cleanly removed when the trace
+  // screen is re-entered, without needing to store individual listener references.
+  if (canvas._drawAbort) canvas._drawAbort.abort();
+  canvas._drawAbort = new AbortController();
+  const sig = canvas._drawAbort.signal;
+  drawCtx = canvas.getContext('2d');
+  const dc = canvas;
 
-  dc.addEventListener('mousedown',  e => { e.preventDefault(); const c = getCanvasCoords(dc, e); startDraw(c.x, c.y); });
-  dc.addEventListener('mousemove',  e => { e.preventDefault(); const c = getCanvasCoords(dc, e); continueDraw(c.x, c.y); });
-  dc.addEventListener('mouseup',    e => { e.preventDefault(); endDraw(); });
-  dc.addEventListener('mouseleave', e => { if (isDrawing) endDraw(); });
+  dc.addEventListener('mousedown',  e => { e.preventDefault(); const c = getCanvasCoords(dc, e); startDraw(c.x, c.y); }, { signal: sig });
+  dc.addEventListener('mousemove',  e => { e.preventDefault(); const c = getCanvasCoords(dc, e); continueDraw(c.x, c.y); }, { signal: sig });
+  dc.addEventListener('mouseup',    e => { e.preventDefault(); endDraw(); }, { signal: sig });
+  dc.addEventListener('mouseleave', e => { if (isDrawing) endDraw(); }, { signal: sig });
 
-  dc.addEventListener('touchstart',  e => { e.preventDefault(); const c = getCanvasCoords(dc, e); startDraw(c.x, c.y); }, { passive:false });
-  dc.addEventListener('touchmove',   e => { e.preventDefault(); const c = getCanvasCoords(dc, e); continueDraw(c.x, c.y); }, { passive:false });
-  dc.addEventListener('touchend',    e => { e.preventDefault(); endDraw(); }, { passive:false });
-  dc.addEventListener('touchcancel', e => { e.preventDefault(); endDraw(); }, { passive:false });
+  dc.addEventListener('touchstart',  e => { e.preventDefault(); const c = getCanvasCoords(dc, e); startDraw(c.x, c.y); }, { passive:false, signal: sig });
+  dc.addEventListener('touchmove',   e => { e.preventDefault(); const c = getCanvasCoords(dc, e); continueDraw(c.x, c.y); }, { passive:false, signal: sig });
+  dc.addEventListener('touchend',    e => { e.preventDefault(); endDraw(); }, { passive:false, signal: sig });
+  dc.addEventListener('touchcancel', e => { e.preventDefault(); endDraw(); }, { passive:false, signal: sig });
 }
 
 function getCanvasCoords(canvas, e) {
@@ -1095,8 +1090,8 @@ function initAdventureScreen() {
 
 function getDailyAdventure() {
   const now = new Date();
-  // Use year * 1000 + month * 31 + day so the seed is unique across months and years.
-  const seed = now.getFullYear() * 1000 + now.getMonth() * 31 + now.getDate();
+  // Use a compact YYYYMMDD integer so the seed is always unique per calendar day.
+  const seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
   const AL   = ALPHA_LEN;
   const WL   = READ_WORDS.level1.length;
   const lo   = (seed * 3) % AL;
