@@ -47,7 +47,7 @@
     _scheduleNext();
 
     // Pause/resume the countdown when the user hides the tab.
-    _visibilityOff = _handleVisibilityChange.bind(null, screenId);
+    _visibilityOff = _handleVisibilityChange;
     document.addEventListener('visibilitychange', _visibilityOff);
   }
 
@@ -156,7 +156,7 @@
     // Load the AdSense script once.
     // TODO: Verify ADSENSE_CLIENT_ID in ad-config.js before enabling.
     if (!document.getElementById('adsense-script')) {
-      var script    = document.createElement('script');
+      const script    = document.createElement('script');
       script.id     = 'adsense-script';
       script.async  = true;
       script.src    = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
@@ -170,10 +170,10 @@
 
     // Replace the placeholder div with a real <ins> ad tag.
     // TODO: Confirm AD_SLOT_ID in ad-config.js before enabling.
-    var placeholder = document.getElementById('ad-placeholder');
+    const placeholder = document.getElementById('ad-placeholder');
     if (!placeholder) return;
 
-    var ins = document.createElement('ins');
+    const ins = document.createElement('ins');
     ins.className               = 'adsbygoogle';
     ins.style.display           = 'block';
     ins.dataset.adClient        = AD_CONFIG.ADSENSE_CLIENT_ID;

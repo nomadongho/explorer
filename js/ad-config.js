@@ -42,9 +42,7 @@ const AD_CONFIG = {
   // Must be false for real ad revenue in production.
   AD_TEST_MODE: true,
 
-  // ── Delay before ad appears (milliseconds) ─────────────────────────
-  // The ad shows only after the learner has been on a module screen
-  // for this many milliseconds of active (tab-visible) time.
-  // Default: 60 000 ms = 60 seconds.
-  AD_DELAY_MS: 60000,
+  // Delay (in ms) before showing the ad after entering a module.
+  // 60 * 1000 = 60 seconds of active (tab-visible) time.
+  AD_DELAY_MS: 60 * 1000,
 };
