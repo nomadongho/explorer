@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A collection of interactive learning apps made with love for Leo Park — explore math, English, and time together." />
+  <title>Leo's Explorer — Learning Apps for Leo Park</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" role="banner">
+    <div class="hero__stars" aria-hidden="true">
+      <span class="star star--1">✦</span>
+      <span class="star star--2">✦</span>
+      <span class="star star--3">✧</span>
+      <span class="star star--4">✦</span>
+      <span class="star star--5">✧</span>
+      <span class="star star--6">✦</span>
+    </div>
+    <div class="container hero__inner">
+      <div class="hero__badge">Made for Leo Park ✨</div>
+      <h1 class="hero__title">A Little World Built<br />Just for You, Leo</h1>
+      <p class="hero__subtitle">
+        Three small apps, made with a lot of love — to help you learn
+        through play, follow your curiosity, and grow one discovery at a time.
+      </p>
+      <a href="#apps" class="btn btn--hero">Explore the Apps</a>
+    </div>
+    <div class="hero__wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#faf8f4"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about section" aria-labelledby="about-heading">
+    <div class="container about__inner">
+      <div class="about__icon" aria-hidden="true">🌱</div>
+      <h2 id="about-heading" class="section__title">Where It All Began</h2>
+      <p class="about__text">
+        Learning should never feel like a chore. I built these apps because I wanted
+        Leo Park to have a place where numbers, letters, and clocks come alive — where
+        every tap feels like an adventure, not a test. Each app was designed to meet
+        Leo exactly where he is, spark a little joy, and let him discover things at
+        his own pace.
+      </p>
+      <p class="about__text">
+        They are simple. They are small. But every pixel was placed with care.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== APP CARDS ===== -->
+  <section id="apps" class="apps section" aria-labelledby="apps-heading">
+    <div class="container">
+      <h2 id="apps-heading" class="section__title">The Three Explorers</h2>
+      <p class="section__subtitle">Pick one and start exploring — there is no wrong door.</p>
+
+      <div class="cards">
+
+        <!-- Math Explorer -->
+        <article class="card" aria-labelledby="math-title">
+          <div class="card__icon" aria-hidden="true">🔢</div>
+          <h3 id="math-title" class="card__title">Math Explorer</h3>
+          <p class="card__desc">
+            A playful space to practice numbers, counting, and early addition and subtraction — one step at a time.
+          </p>
+          <ul class="card__tags" aria-label="Features">
+            <li>Count &amp; Compare</li>
+            <li>Addition &amp; Subtraction</li>
+            <li>Visual Activities</li>
+          </ul>
+          <a href="https://nomadongho.github.io/math-explorer" class="btn btn--card" target="_blank" rel="noopener noreferrer">
+            Open App <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <!-- English Explorer -->
+        <article class="card" aria-labelledby="english-title">
+          <div class="card__icon" aria-hidden="true">📖</div>
+          <h3 id="english-title" class="card__title">English Explorer</h3>
+          <p class="card__desc">
+            Letters, sounds, and first words — with audio to help Leo hear how English really sounds.
+          </p>
+          <ul class="card__tags" aria-label="Features">
+            <li>Alphabet &amp; Phonics</li>
+            <li>Sounds &amp; Listening</li>
+            <li>Early Word Reading</li>
+          </ul>
+          <a href="https://nomadongho.github.io/english-explorer" class="btn btn--card" target="_blank" rel="noopener noreferrer">
+            Open App <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <!-- Clock Explorer -->
+        <article class="card" aria-labelledby="clock-title">
+          <div class="card__icon" aria-hidden="true">🕐</div>
+          <h3 id="clock-title" class="card__title">Clock Explorer</h3>
+          <p class="card__desc">
+            An interactive clock for learning to tell time — move the hands, read the hours, and make time make sense.
+          </p>
+          <ul class="card__tags" aria-label="Features">
+            <li>Read the Clock</li>
+            <li>Set the Hands</li>
+            <li>Daily Time Skills</li>
+          </ul>
+          <a href="https://nomadongho.github.io/clock-explorer" class="btn btn--card" target="_blank" rel="noopener noreferrer">
+            Open App <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEARNING JOURNEY ===== -->
+  <section class="journey section" aria-labelledby="journey-heading">
+    <div class="container">
+      <h2 id="journey-heading" class="section__title">Built for Leo's Learning Journey</h2>
+      <p class="section__subtitle">Each app targets a different part of early childhood learning.</p>
+
+      <div class="journey__grid">
+        <div class="journey__item fade-in">
+          <span class="journey__emoji" aria-hidden="true">🔢</span>
+          <h3 class="journey__label">Math Explorer</h3>
+          <p class="journey__detail">Numbers, counting, and early problem solving — the foundation of logical thinking.</p>
+        </div>
+        <div class="journey__item fade-in">
+          <span class="journey__emoji" aria-hidden="true">📖</span>
+          <h3 class="journey__label">English Explorer</h3>
+          <p class="journey__detail">Letters, sounds, and reading — building the language skills that open every other door.</p>
+        </div>
+        <div class="journey__item fade-in">
+          <span class="journey__emoji" aria-hidden="true">🕐</span>
+          <h3 class="journey__label">Clock Explorer</h3>
+          <p class="journey__detail">Time and daily life skills — understanding the clock is one of the first steps toward independence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLOSING MESSAGE ===== -->
+  <section class="closing section" aria-labelledby="closing-heading">
+    <div class="container closing__inner">
+      <div class="closing__icon" aria-hidden="true">💛</div>
+      <h2 id="closing-heading" class="closing__title">To Leo</h2>
+      <p class="closing__text">
+        You are still so young, but you already ask questions that surprise me.
+        You want to know how things work, what numbers mean, what the little hand on the clock is doing.
+        I made these apps because I want to be part of that curiosity — to be there with you,
+        even in the small moments when you sit down and tap through something new.
+      </p>
+      <p class="closing__text">
+        Keep asking. Keep exploring. I'll keep building.
+      </p>
+      <p class="closing__signature">— Dad</p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <p class="footer__text">Made with love for Leo Park. 💛</p>
+      <p class="footer__copy">&copy; <span id="year"></span> nomadongho</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
