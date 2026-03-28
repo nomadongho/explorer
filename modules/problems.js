@@ -45,7 +45,7 @@ const Problems = (() => {
   }
 
   /* ══════════════════════════════════════════════════════════════════
-   * MODE 1: 숫자 읽기 (Number Reading)
+   * MODE 1: Number Reading
    * ══════════════════════════════════════════════════════════════════ */
 
   /** Number range by level. */
@@ -60,8 +60,8 @@ const Problems = (() => {
 
   /**
    * Generate a number-reading problem.
-   * type 'numToKorean': show number, pick Korean reading.
-   * type 'koreanToNum': show Korean reading, pick number.
+   * type 'numToWords': show number, pick English word reading.
+   * type 'wordsToNum': show English words, pick number.
    */
   function numberReadProblem(level) {
     const [min, max] = numberReadRange(level);
@@ -69,21 +69,21 @@ const Problems = (() => {
     const wrongNums = wrongNumbers(correct, 2, min, max);
     const allNums = shuffle([correct, ...wrongNums]);
 
-    const type = Math.random() < 0.5 ? 'numToKorean' : 'koreanToNum';
+    const type = Math.random() < 0.5 ? 'numToWords' : 'wordsToNum';
 
-    if (type === 'numToKorean') {
+    if (type === 'numToWords') {
       return {
-        type: 'numToKorean',
+        type: 'numToWords',
         display: String(correct),
-        answer: BigNum.toKorean(String(correct)),
-        choices: allNums.map(n => BigNum.toKorean(String(n))),
-        correctChoice: BigNum.toKorean(String(correct)),
+        answer: BigNum.toEnglish(String(correct)),
+        choices: allNums.map(n => BigNum.toEnglish(String(n))),
+        correctChoice: BigNum.toEnglish(String(correct)),
         number: correct,
       };
     } else {
       return {
-        type: 'koreanToNum',
-        display: BigNum.toKorean(String(correct)),
+        type: 'wordsToNum',
+        display: BigNum.toEnglish(String(correct)),
         answer: String(correct),
         choices: allNums.map(n => String(n)),
         correctChoice: String(correct),
@@ -93,7 +93,7 @@ const Problems = (() => {
   }
 
   /* ══════════════════════════════════════════════════════════════════
-   * MODE 2: 숫자 세기 (Counting)
+   * MODE 2: Counting
    * ══════════════════════════════════════════════════════════════════ */
 
   function countingRange(level) {
@@ -122,7 +122,7 @@ const Problems = (() => {
   }
 
   /* ══════════════════════════════════════════════════════════════════
-   * MODE 3: 더하기 (Addition)
+   * MODE 3: Addition
    * ══════════════════════════════════════════════════════════════════ */
 
   function additionRange(level) {
@@ -161,7 +161,7 @@ const Problems = (() => {
   }
 
   /* ══════════════════════════════════════════════════════════════════
-   * MODE 4: 빼기 (Subtraction)
+   * MODE 4: Subtraction
    * ══════════════════════════════════════════════════════════════════ */
 
   function subtractionRange(level) {
@@ -195,7 +195,7 @@ const Problems = (() => {
   }
 
   /* ══════════════════════════════════════════════════════════════════
-   * MODE 5: 자릿수 배우기 (Place Value)
+   * MODE 5: Place Value
    * ══════════════════════════════════════════════════════════════════ */
 
   function placeValueRange(level) {
@@ -209,10 +209,10 @@ const Problems = (() => {
   /** Build place-value breakdown: { ones, tens, hundreds, thousands, ... } */
   function placeValueBreakdown(n) {
     const digits = BigNum.toDigitArray(String(n)); // [ones, tens, ...]
-    const names = ['일의 자리', '십의 자리', '백의 자리', '천의 자리', '만의 자리'];
+    const names = ['ones', 'tens', 'hundreds', 'thousands', 'ten-thousands'];
     const result = [];
     for (let i = 0; i < digits.length; i++) {
-      result.push({ place: names[i] || `10^${i}의 자리`, digit: Number(digits[i]), power: i });
+      result.push({ place: names[i] || `10^${i}`, digit: Number(digits[i]), power: i });
     }
     return result;
   }
@@ -244,7 +244,7 @@ const Problems = (() => {
   }
 
   /* ══════════════════════════════════════════════════════════════════
-   * MODE 6: 3D 블록 세기 (3D Block Counting)
+   * MODE 6: 3D Block Counting
    * ══════════════════════════════════════════════════════════════════ */
 
   function blockCountRange(level) {

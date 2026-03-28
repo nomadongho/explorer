@@ -20,7 +20,7 @@
   --clr-shadow:     rgba(0,0,0,0.10);
   --radius:         18px;
   --radius-sm:      10px;
-  --font:           'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  --font:           'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --transition:     0.2s ease;
 }
 
@@ -295,11 +295,12 @@ p  { line-height: 1.5; }
   line-height: 1;
 }
 
-.question-korean-big {
-  font-size: clamp(1.6rem, 6vw, 3rem);
+.question-words-big {
+  font-size: clamp(1.4rem, 5vw, 2.6rem);
   font-weight: 800;
   color: var(--clr-blue);
   line-height: 1.2;
+  text-align: center;
 }
 
 .question-instruction {
@@ -563,20 +564,25 @@ p  { line-height: 1.5; }
    ══════════════════════════════════════════════════════════════════ */
 .blocks3d-container {
   width: 100%;
-  height: 260px;
-  background: linear-gradient(135deg, #F0F8FF, #FFF0F5);
+  height: 300px;
+  background: linear-gradient(135deg, #E8F4FF, #FFF0F5);
   border-radius: var(--radius);
   overflow: hidden;
   position: relative;
   margin-bottom: 12px;
   cursor: grab;
   box-shadow: 0 4px 16px var(--clr-shadow);
+  /* Perspective makes all child 3D transforms look correct */
   perspective: 900px;
   perspective-origin: 50% 40%;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
 }
 .blocks3d-container:active { cursor: grabbing; }
 
-/* The scene holds the world and gets the CSS transform for rotation */
+/* The scene: fills the container, gets rotateX/rotateY applied,
+   and flex-centers its children so the world anchor sits in the middle. */
 .block-scene {
   width: 100%;
   height: 100%;
@@ -584,18 +590,17 @@ p  { line-height: 1.5; }
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
-  transition: none;
   will-change: transform;
 }
 
-/* The world holds the actual cubes, centered */
+/* The world: a zero-size anchor div. Cubes are positioned
+   absolutely relative to it using 3D translate3d. */
 .block-world {
   position: relative;
+  width: 0;
+  height: 0;
   transform-style: preserve-3d;
 }
-
-.iso-cube { pointer-events: none; }
-.iso-cube--hl .cube-top { filter: brightness(1.25) drop-shadow(0 0 8px var(--clr-secondary)); }
 
 .blocks3d-controls {
   display: flex;

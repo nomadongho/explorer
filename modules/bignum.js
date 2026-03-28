@@ -172,7 +172,53 @@ const BigNum = (() => {
     return s;
   }
 
-  return { normalize, compare, add, subtract, multiplySmall, formatCommas, toDigitArray, toKorean, randomBigNum };
+  /* ─────────────────────────────────────────────────────────────────
+   * English number words — supports 0–999,999 (for the number-reading
+   * game mode at all current levels).  Very large numbers fall back to
+   * a digit-by-digit reading.
+   * ─────────────────────────────────────────────────────────────────*/
+  const ONES_EN = [
+    '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
+    'sixteen', 'seventeen', 'eighteen', 'nineteen',
+  ];
+  const TENS_EN = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+  /** Convert 1–999 to English words. */
+  function _segEn(n) {
+    if (n <= 0) return '';
+    if (n < 20) return ONES_EN[n];
+    const tens = Math.floor(n / 10);
+    const ones = n % 10;
+    if (n < 100) return TENS_EN[tens] + (ones ? '-' + ONES_EN[ones] : '');
+    const h = Math.floor(n / 100);
+    const rem = n % 100;
+    return ONES_EN[h] + ' hundred' + (rem ? ' ' + _segEn(rem) : '');
+  }
+
+  /**
+   * Convert a non-negative integer string to English spoken form.
+   * Handles 0–999,999,999 natively; falls back to digit reading for larger.
+   */
+  function toEnglish(s) {
+    s = normalize(s);
+    if (s === '0') return 'zero';
+    const n = parseInt(s, 10);
+    if (isNaN(n) || s.length > 9) {
+      // Digit-by-digit fallback for very large numbers
+      return s.split('').map(d => ONES_EN[Number(d)] || 'zero').join(' ');
+    }
+    const millions  = Math.floor(n / 1_000_000);
+    const thousands = Math.floor((n % 1_000_000) / 1_000);
+    const rest      = n % 1_000;
+    const parts = [];
+    if (millions)  parts.push(_segEn(millions)  + ' million');
+    if (thousands) parts.push(_segEn(thousands) + ' thousand');
+    if (rest)      parts.push(_segEn(rest));
+    return parts.join(' ');
+  }
+
+  return { normalize, compare, add, subtract, multiplySmall, formatCommas, toDigitArray, toKorean, toEnglish, randomBigNum };
 })();
 
 // Export for use in other modules (also available as global BigNum)
