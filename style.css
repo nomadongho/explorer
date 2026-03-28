@@ -21,6 +21,7 @@
   --clr-card-1:      #eef6ff;
   --clr-card-2:      #f0faf3;
   --clr-card-3:      #fef5e4;
+  --clr-card-4:      #f0fdf4;
   --clr-text:        #1a1a2e;
   --clr-text-muted:  #5a5a7a;
   --clr-white:       #ffffff;
@@ -284,6 +285,7 @@ ul { list-style: none; }
 .card:nth-child(1) { background: var(--clr-card-1); }
 .card:nth-child(2) { background: var(--clr-card-2); }
 .card:nth-child(3) { background: var(--clr-card-3); }
+.card:nth-child(4) { background: var(--clr-card-4); }
 
 .card::before {
   content: '';
@@ -294,6 +296,7 @@ ul { list-style: none; }
 .card:nth-child(1)::before { background: linear-gradient(90deg, #3a6bc7, #5b9bd5); }
 .card:nth-child(2)::before { background: linear-gradient(90deg, #3aafa9, #52c9a0); }
 .card:nth-child(3)::before { background: linear-gradient(90deg, #f0a500, #f7c948); }
+.card:nth-child(4)::before { background: linear-gradient(90deg, #2d6a4f, #52b788); }
 
 .card:hover,
 .card:focus-within {
