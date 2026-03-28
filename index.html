@@ -67,6 +67,7 @@
           <span>👨‍👩‍👧 Parent Zone — Hold 2s</span>
           <div class="hold-bar-wrap"><div id="hold-bar-home" class="hold-bar-fill"></div></div>
         </button>
+        <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Full Screen">⛶ Full Screen</button>
       </div>
     </div>
   </div>
@@ -137,8 +138,11 @@
 
       <!-- Tab: Letter Sounds -->
       <div id="phonics-tab-sounds" class="tab-panel active">
+        <div class="phonics-stage-label">⭐ Stage 1 — Vowels</div>
+        <div class="phonics-grid phonics-vowels-grid" id="phonics-vowels-grid"></div>
+        <div class="phonics-stage-label">🔡 Stage 1 — Consonants</div>
+        <div class="phonics-grid" id="phonics-cons-grid"></div>
         <p class="tab-hint">Tap any letter to hear its sound! 👆</p>
-        <div class="phonics-grid" id="phonics-letter-grid"></div>
       </div>
 
       <!-- Tab: Word Blending -->
@@ -170,6 +174,7 @@
         <div class="rw-emoji" id="rw-emoji">🐱</div>
         <div class="rw-letters" id="rw-letters"></div>
         <div class="rw-family-tag" id="rw-family-tag"></div>
+        <div class="rw-sentence" id="rw-sentence"></div>
       </div>
       <div class="word-ctrl-row">
         <button class="word-ctrl-btn" onclick="hearCurrentWord()">🔊 Hear</button>
@@ -267,11 +272,14 @@
 
       <div class="parent-card">
         <h3>📊 Progress</h3>
-        <div class="stat-row"><span class="stat-label">Letters Learned</span><span class="stat-val" id="stat-letters">0 / 26</span></div>
+        <div class="stat-row"><span class="stat-label">Letters Viewed</span><span class="stat-val" id="stat-letters">0 / 26</span></div>
         <div class="stat-bar"><div class="stat-bar-fill" id="sb-letters" style="width:0%"></div></div>
+        <div class="stat-row"><span class="stat-label">Letters Traced</span><span class="stat-val" id="stat-letters-traced">0</span></div>
         <div class="stat-row"><span class="stat-label">Words Completed</span><span class="stat-val" id="stat-words">0</span></div>
         <div class="stat-bar"><div class="stat-bar-fill" id="sb-words" style="width:0%"></div></div>
+        <div class="stat-row"><span class="stat-label">Words Read</span><span class="stat-val" id="stat-words-read">0</span></div>
         <div class="stat-row"><span class="stat-label">Games Played</span><span class="stat-val" id="stat-games">0</span></div>
+        <div class="stat-row"><span class="stat-label">Games Won</span><span class="stat-val" id="stat-games-won">0</span></div>
         <div class="stat-row"><span class="stat-label">Total Stars ⭐</span><span class="stat-val" id="stat-stars">0</span></div>
       </div>
 
@@ -280,18 +288,23 @@
         <div class="badges-row">
           <div class="badge-tile" id="badge-tile-1">
             <div class="badge-icon" id="badge-icon-1">🔒</div>
-            <div class="badge-name">Explorer Starter</div>
-            <div class="badge-req">5 stars</div>
+            <div class="badge-name">Sound Scout</div>
+            <div class="badge-req">10 correct answers</div>
           </div>
           <div class="badge-tile" id="badge-tile-2">
             <div class="badge-icon" id="badge-icon-2">🔒</div>
-            <div class="badge-name">Sound Seeker</div>
-            <div class="badge-req">10 stars</div>
+            <div class="badge-name">Letter Explorer</div>
+            <div class="badge-req">5 letters traced</div>
           </div>
           <div class="badge-tile" id="badge-tile-3">
             <div class="badge-icon" id="badge-icon-3">🔒</div>
-            <div class="badge-name">Word Wizard</div>
-            <div class="badge-req">20 stars</div>
+            <div class="badge-name">Word Walker</div>
+            <div class="badge-req">10 words read</div>
+          </div>
+          <div class="badge-tile" id="badge-tile-4">
+            <div class="badge-icon" id="badge-icon-4">🔒</div>
+            <div class="badge-name">Reading Rocket</div>
+            <div class="badge-req">Finish daily adventure</div>
           </div>
         </div>
       </div>
@@ -306,6 +319,19 @@
           </label>
         </div>
         <div class="setting-row">
+          <span class="setting-label">Speech Speed</span>
+          <select id="setting-speed" class="setting-select" onchange="updateSetting('speechSpeed', this.value)">
+            <option value="normal">Normal</option>
+            <option value="slow">Slow</option>
+          </select>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Voice</span>
+          <select id="setting-voice" class="setting-select" onchange="updateSetting('voiceURI', this.value)">
+            <option value="">Default voice</option>
+          </select>
+        </div>
+        <div class="setting-row">
           <span class="setting-label">Learning Mode</span>
           <select id="setting-mode" class="setting-select" onchange="updateSetting('learningMode', this.value)">
             <option value="alphabet">Alphabet Focus</option>
@@ -313,10 +339,32 @@
             <option value="mixed" selected>Mixed</option>
           </select>
         </div>
+        <div class="setting-row">
+          <span class="setting-label">Uppercase Letters First</span>
+          <label class="toggle">
+            <input type="checkbox" id="setting-uppercase" checked onchange="updateSetting('uppercaseFirst', this.checked)">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Phonics-First Mode</span>
+          <label class="toggle">
+            <input type="checkbox" id="setting-phonics" onchange="updateSetting('phonicsFirst', this.checked)">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">🌙 Bedtime Calm Mode</span>
+          <label class="toggle">
+            <input type="checkbox" id="setting-bedtime" onchange="updateSetting('bedtimeMode', this.checked)">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
       </div>
 
       <div class="parent-card danger">
         <button class="reset-btn" onclick="confirmReset()">🗑️ Reset All Progress</button>
+        <button class="reset-btn secondary" onclick="resetDailyAdventure()">🔄 Reset Daily Adventure</button>
       </div>
     </div>
   </div>
@@ -352,6 +400,7 @@
   <!-- ===== OVERLAYS ===== -->
   <div id="star-pop" class="star-pop hidden">⭐ +1</div>
   <div id="badge-popup" class="badge-popup hidden"></div>
+  <div id="confetti-container" class="confetti-container"></div>
 
   <script src="app.js"></script>
 </body>
