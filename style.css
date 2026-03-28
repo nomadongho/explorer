@@ -663,3 +663,39 @@ button:focus-visible {
     padding-bottom: 80px;
   }
 }
+
+/* ── Contact Footer ──────────────────────────────────────── */
+#contact-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem 0.5rem;
+  padding: 10px 16px 14px;
+  font-size: 0.75rem;
+  color: var(--color-subtle);
+  opacity: 0.75;
+}
+
+.contact-footer-label {
+  white-space: nowrap;
+}
+
+.contact-footer-sep {
+  color: var(--color-subtle);
+}
+
+.contact-footer-link {
+  color: var(--color-subtle);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: color var(--transition), text-decoration-color var(--transition);
+  white-space: nowrap;
+}
+
+.contact-footer-link:hover,
+.contact-footer-link:focus-visible {
+  color: var(--color-primary);
+  text-decoration-color: var(--color-primary);
+  outline: none;
+}
