@@ -402,6 +402,24 @@
   <div id="badge-popup" class="badge-popup hidden"></div>
   <div id="confetti-container" class="confetti-container"></div>
 
+  <!-- ===== AD CONTAINER (module screens only, shown after delay) ===== -->
+  <!-- Not shown on home screen or Parent Zone — see js/ad-manager.js   -->
+  <div id="module-ad-container"
+       class="module-ad-container hidden"
+       role="complementary"
+       aria-label="Advertisement"
+       aria-atomic="true">
+    <!-- Placeholder rendered when ADS_ENABLED is false.              -->
+    <!-- TODO: When ADS_ENABLED = true this div is replaced by        -->
+    <!--       a real <ins class="adsbygoogle"> tag automatically.    -->
+    <div id="ad-placeholder" class="ad-placeholder">
+      <span class="ad-placeholder-label">Ad space</span>
+    </div>
+  </div>
+
+  <!-- Ad config and manager must load before app.js -->
+  <script src="js/ad-config.js"></script>
+  <script src="js/ad-manager.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

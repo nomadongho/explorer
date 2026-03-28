@@ -1276,3 +1276,86 @@ body.bedtime-mode .game-status-bar {
   background: #1E2A4A;
   border-color: #2A2A5A;
 }
+
+/* ================================================
+   MODULE AD BANNER
+   Shown on learning screens after a 60-second delay.
+   Not shown on home or Parent Zone screens.
+   See js/ad-config.js and js/ad-manager.js.
+   ================================================ */
+:root {
+  --ad-h: 60px; /* height reserved for the ad banner */
+}
+
+.module-ad-container {
+  position: fixed;
+  bottom: var(--nav-h);
+  left: 0;
+  right: 0;
+  height: var(--ad-h);
+  z-index: 150;      /* above screen content (100), below overlays (200+) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--light-border);
+  /* Start invisible; animate in when .ad-visible is added */
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.module-ad-container.ad-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Extra bottom padding added to .screen-scroll while the ad is showing */
+.screen-scroll.ad-active-padding {
+  padding-bottom: calc(var(--nav-h) + var(--ad-h) + 16px);
+}
+
+/* Placeholder shown when ADS_ENABLED is false */
+.ad-placeholder {
+  width: 100%;
+  max-width: 728px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F5F5F5;
+  border: 1px dashed #C8C8C8;
+  border-radius: 4px;
+}
+
+.ad-placeholder-label {
+  font-family: var(--font-b);
+  font-size: 11px;
+  color: #ABABAB;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Bedtime mode: keep the ad bar dark */
+body.bedtime-mode .module-ad-container {
+  background: #16213E;
+  border-top-color: #2A2A4A;
+}
+body.bedtime-mode .ad-placeholder {
+  background: #1E2A4A;
+  border-color: #3A3A6A;
+}
+body.bedtime-mode .ad-placeholder-label {
+  color: #6060A0;
+}
+
+/* Responsive: bump ad height slightly on wide screens */
+@media (min-width: 700px) {
+  :root { --ad-h: 90px; }
+}

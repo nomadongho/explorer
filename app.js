@@ -233,6 +233,9 @@ function speakWord(word) {
 let autoPlayTimer = null;
 
 function showScreen(id) {
+  // Cancel any active ad timer from the previous screen.
+  destroyDelayedModuleAd();
+
   // Stop auto-play if leaving letters screen
   if (id !== 'letters' && autoPlayTimer) {
     clearInterval(autoPlayTimer);
@@ -304,6 +307,10 @@ function showScreen(id) {
     };
     setTimeout(() => speak(readMap[id] || '', 0.9, 1.1), 400);
   }
+
+  // Start the delayed ad countdown for module screens.
+  // initDelayedModuleAd ignores home and parent-zone screens automatically.
+  initDelayedModuleAd(id);
 }
 
 function navigateFromHome(screenId, name) {
