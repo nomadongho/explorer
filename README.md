@@ -9,6 +9,8 @@ A polished, mobile-friendly landing page for [Leo's Explorer](https://nomadongho
 | Math Explorer | https://nomadongho.github.io/math-explorer |
 | English Explorer | https://nomadongho.github.io/english-explorer |
 | Clock Explorer | https://nomadongho.github.io/clock-explorer |
+| Māori Explorer | https://nomadongho.github.io/maori-explorer |
+| Korean Explorer | https://nomadongho.github.io/korean-explorer |
 
 ## Files
 
