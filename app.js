@@ -182,6 +182,7 @@ const UI = (() => {
     autoSpinning = false;
     const btn = document.getElementById('btn-autospin');
     if (btn) btn.textContent = STRINGS.autoSpinStart;
+    AdManager.destroy();
     showScreen('home-screen');
     refreshHome();
   }
@@ -233,6 +234,9 @@ const UI = (() => {
 
     // Generate first problem
     generateAndShowProblem(mode);
+
+    // Start the delayed ad timer for this module screen
+    AdManager.init(document.getElementById(mode + '-screen'));
   }
 
   function modePrefix(mode) {
