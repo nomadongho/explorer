@@ -189,7 +189,7 @@ function speak(text, rate = 0.9, pitch = 1.1) {
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(String(text));
   // Apply bedtime or slow-speech setting
-  const speedMod = (state.settings.bedtimeMode || state.settings.speechSpeed === 'slow') ? 0.65 : 1.0;
+  const speedMod = (state.settings.bedtimeMode || state.settings.speechSpeed === 'slow') ? SLOW_SPEECH_RATE : 1.0;
   utt.rate  = rate * speedMod;
   utt.pitch = state.settings.bedtimeMode ? 0.9 : pitch;
   utt.lang  = 'en-US';
@@ -206,8 +206,20 @@ function speakLetter(letter) {
   speak(letter, 0.8, 1.2);
 }
 
+// Map short sounds to phonetic strings TTS engines can pronounce clearly
+const SOUND_SPEECH_MAP = {
+  'a':'ah', 'e':'eh', 'i':'ih', 'o':'oh', 'u':'uh',
+  'b':'buh', 'k':'kuh', 'd':'duh', 'f':'fuh', 'g':'guh',
+  'h':'huh', 'j':'juh', 'l':'luh', 'm':'muh', 'n':'nuh',
+  'p':'puh', 'r':'ruh', 's':'sss', 't':'tuh', 'v':'vuh',
+  'w':'wuh', 'y':'yuh', 'z':'zzz', 'kw':'kwuh', 'ks':'ks',
+};
+
+const SLOW_SPEECH_RATE = 0.65;
+
 function speakSound(sound) {
-  speak(String(sound), 0.7, 1.2);
+  const tts = SOUND_SPEECH_MAP[sound] || sound;
+  speak(tts, 0.7, 1.2);
 }
 
 function speakWord(word) {
@@ -1405,6 +1417,7 @@ function checkBadgeMilestones() {
       case 'lettersTraced':  val = state.progress.lettersTraced  || 0; break;
       case 'wordsRead':      val = state.progress.wordsRead      || 0; break;
       case 'dailyComplete':  val = state.progress.dailyComplete  || 0; break;
+      default: return; // unknown badge type — skip silently
     }
     if (val >= badge.threshold) {
       state.earnedBadges.push(badge.id);
