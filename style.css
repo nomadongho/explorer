@@ -507,6 +507,27 @@ input  { font-family: var(--font-b); }
   width: 100%;
   max-width: 360px;
 }
+.phonics-vowels-grid {
+  grid-template-columns: repeat(5, 1fr);
+  max-width: 280px;
+}
+.phonics-stage-label {
+  font-family: var(--font-h);
+  font-size: 16px;
+  color: var(--medium);
+  text-align: center;
+  margin-top: 4px;
+}
+.phonics-ltr-btn.phonics-vowel {
+  background: linear-gradient(135deg, #FFF5E0, #FFE5B4);
+  border-color: var(--orange);
+  color: #C07010;
+}
+.phonics-ltr-btn.phonics-cons {
+  background: linear-gradient(135deg, #F0F8FF, #E0F0FF);
+  border-color: var(--blue);
+  color: #1565C0;
+}
 .phonics-ltr-btn {
   aspect-ratio: 1;
   border-radius: var(--radius-sm);
@@ -649,6 +670,30 @@ input  { font-family: var(--font-b); }
   text-align: center;
 }
 .rw-letter-btn:active { transform: scale(0.88); background: var(--red); color: #fff; }
+/* Sight-word sample sentence */
+.rw-sentence {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--purple);
+  background: #F8F0FF;
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Family ending highlight on letter buttons */
+.rw-letter-btn.rw-family-end {
+  background: #FFF0E0;
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.rw-letter-btn.rw-tapped {
+  background: var(--red) !important;
+  color: #fff !important;
+  transform: scale(0.90);
+}
+
 .rw-family-tag {
   font-size: 16px;
   font-weight: 800;
@@ -1148,4 +1193,86 @@ input  { font-family: var(--font-b); }
   .blend-big-emoji { font-size: 90px; }
   .rw-emoji { font-size: 86px; }
   .rw-letter-btn { font-size: 52px; }
+}
+
+/* ================================================
+   FULLSCREEN BUTTON
+   ================================================ */
+.fullscreen-btn {
+  background: linear-gradient(135deg, #636E72, #2D3436);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: var(--shadow);
+  margin-top: 4px;
+  transition: transform 0.15s;
+}
+.fullscreen-btn:active { transform: scale(0.93); }
+
+/* ================================================
+   SECONDARY RESET BUTTON
+   ================================================ */
+.reset-btn.secondary {
+  background: linear-gradient(135deg, var(--blue), #2196F3);
+  margin-top: 6px;
+}
+
+/* ================================================
+   CONFETTI
+   ================================================ */
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 998;
+  overflow: hidden;
+}
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  animation: confetti-fall linear forwards;
+}
+@keyframes confetti-fall {
+  0%   { transform: translateY(0) rotate(0deg);    opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ================================================
+   BEDTIME CALM MODE
+   ================================================ */
+body.bedtime-mode {
+  --bg:      #1A1A2E;
+  --card-bg: #16213E;
+  --dark:    #E0E0F0;
+  --medium:  #A0A0C0;
+  --light-border: #2A2A4A;
+}
+body.bedtime-mode .top-bar,
+body.bedtime-mode .bottom-nav {
+  background: #16213E;
+  box-shadow: none;
+}
+body.bedtime-mode .home-hero .hero-title {
+  background: linear-gradient(135deg, #8BE8E8, #DDA0DD);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+body.bedtime-mode .home-card {
+  background: #1E2A4A;
+  border-top-color: #4A4A7A;
+}
+body.bedtime-mode .letter-big-card {
+  background: linear-gradient(135deg, #1E2A4A, #251840);
+}
+body.bedtime-mode .read-word-card,
+body.bedtime-mode .parent-card,
+body.bedtime-mode .game-select-tile,
+body.bedtime-mode .adventure-step,
+body.bedtime-mode .question-box,
+body.bedtime-mode .game-status-bar {
+  background: #1E2A4A;
+  border-color: #2A2A5A;
 }

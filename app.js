@@ -10,96 +10,108 @@
 // ==========================================
 
 const ALPHABET_DATA = [
-  { letter:'A', upper:'A', lower:'a', sound:'ah',   word:'Apple',    emoji:'🍎', word2:'Ant',        emoji2:'🐜' },
-  { letter:'B', upper:'B', lower:'b', sound:'buh',  word:'Ball',     emoji:'⚽', word2:'Butterfly',  emoji2:'🦋' },
-  { letter:'C', upper:'C', lower:'c', sound:'kuh',  word:'Cat',      emoji:'🐱', word2:'Cake',       emoji2:'🎂' },
-  { letter:'D', upper:'D', lower:'d', sound:'duh',  word:'Dog',      emoji:'🐶', word2:'Duck',       emoji2:'🦆' },
-  { letter:'E', upper:'E', lower:'e', sound:'eh',   word:'Elephant', emoji:'🐘', word2:'Egg',        emoji2:'🥚' },
-  { letter:'F', upper:'F', lower:'f', sound:'fuh',  word:'Fish',     emoji:'🐟', word2:'Frog',       emoji2:'🐸' },
-  { letter:'G', upper:'G', lower:'g', sound:'guh',  word:'Goat',     emoji:'🐐', word2:'Grapes',     emoji2:'🍇' },
-  { letter:'H', upper:'H', lower:'h', sound:'huh',  word:'Hat',      emoji:'🎩', word2:'House',      emoji2:'🏠' },
-  { letter:'I', upper:'I', lower:'i', sound:'ih',   word:'Ice Cream',emoji:'🍦', word2:'Igloo',      emoji2:'🧊' },
-  { letter:'J', upper:'J', lower:'j', sound:'juh',  word:'Juice',    emoji:'🧃', word2:'Jellyfish',  emoji2:'🪼' },
-  { letter:'K', upper:'K', lower:'k', sound:'kuh',  word:'Kite',     emoji:'🪁', word2:'Key',        emoji2:'🔑' },
-  { letter:'L', upper:'L', lower:'l', sound:'luh',  word:'Lion',     emoji:'🦁', word2:'Leaf',       emoji2:'🍃' },
-  { letter:'M', upper:'M', lower:'m', sound:'muh',  word:'Moon',     emoji:'🌙', word2:'Monkey',     emoji2:'🐒' },
-  { letter:'N', upper:'N', lower:'n', sound:'nuh',  word:'Nest',     emoji:'🪺', word2:'Nose',       emoji2:'👃' },
-  { letter:'O', upper:'O', lower:'o', sound:'oh',   word:'Orange',   emoji:'🍊', word2:'Owl',        emoji2:'🦉' },
-  { letter:'P', upper:'P', lower:'p', sound:'puh',  word:'Pig',      emoji:'🐷', word2:'Pizza',      emoji2:'🍕' },
-  { letter:'Q', upper:'Q', lower:'q', sound:'kwuh', word:'Queen',    emoji:'👸', word2:'Quail',      emoji2:'🐦' },
-  { letter:'R', upper:'R', lower:'r', sound:'ruh',  word:'Rabbit',   emoji:'🐰', word2:'Rainbow',    emoji2:'🌈' },
-  { letter:'S', upper:'S', lower:'s', sound:'sss',  word:'Sun',      emoji:'☀️', word2:'Star',       emoji2:'⭐' },
-  { letter:'T', upper:'T', lower:'t', sound:'tuh',  word:'Tiger',    emoji:'🐯', word2:'Tree',       emoji2:'🌳' },
-  { letter:'U', upper:'U', lower:'u', sound:'uh',   word:'Umbrella', emoji:'☂️', word2:'Unicorn',    emoji2:'🦄' },
-  { letter:'V', upper:'V', lower:'v', sound:'vuh',  word:'Van',      emoji:'🚐', word2:'Violin',     emoji2:'🎻' },
-  { letter:'W', upper:'W', lower:'w', sound:'wuh',  word:'Whale',    emoji:'🐋', word2:'Watermelon', emoji2:'🍉' },
-  { letter:'X', upper:'X', lower:'x', sound:'ks',   word:'X-ray',    emoji:'🩻', word2:'Xylophone',  emoji2:'🎹' },
-  { letter:'Y', upper:'Y', lower:'y', sound:'yuh',  word:'Yak',      emoji:'🐃', word2:'Yarn',       emoji2:'🧶' },
-  { letter:'Z', upper:'Z', lower:'z', sound:'zzz',  word:'Zebra',    emoji:'🦓', word2:'Zipper',     emoji2:'🤐' },
+  { letter:'A', upper:'A', lower:'a', sound:'a',   word:'Apple',    emoji:'🍎', word2:'Ant',      emoji2:'🐜' },
+  { letter:'B', upper:'B', lower:'b', sound:'b',   word:'Ball',     emoji:'⚽', word2:'Bat',      emoji2:'🦇' },
+  { letter:'C', upper:'C', lower:'c', sound:'k',   word:'Cat',      emoji:'🐱', word2:'Car',      emoji2:'🚗' },
+  { letter:'D', upper:'D', lower:'d', sound:'d',   word:'Dog',      emoji:'🐶', word2:'Duck',     emoji2:'🦆' },
+  { letter:'E', upper:'E', lower:'e', sound:'e',   word:'Egg',      emoji:'🥚', word2:'Elephant', emoji2:'🐘' },
+  { letter:'F', upper:'F', lower:'f', sound:'f',   word:'Fish',     emoji:'🐟', word2:'Fan',      emoji2:'🌀' },
+  { letter:'G', upper:'G', lower:'g', sound:'g',   word:'Goat',     emoji:'🐐', word2:'Gift',     emoji2:'🎁' },
+  { letter:'H', upper:'H', lower:'h', sound:'h',   word:'Hat',      emoji:'🎩', word2:'Hand',     emoji2:'🖐️' },
+  { letter:'I', upper:'I', lower:'i', sound:'i',   word:'Igloo',    emoji:'🧊', word2:'Insect',   emoji2:'🐛' },
+  { letter:'J', upper:'J', lower:'j', sound:'j',   word:'Jam',      emoji:'🍓', word2:'Jet',      emoji2:'✈️' },
+  { letter:'K', upper:'K', lower:'k', sound:'k',   word:'Kite',     emoji:'🪁', word2:'Key',      emoji2:'🔑' },
+  { letter:'L', upper:'L', lower:'l', sound:'l',   word:'Lion',     emoji:'🦁', word2:'Leg',      emoji2:'🦵' },
+  { letter:'M', upper:'M', lower:'m', sound:'m',   word:'Moon',     emoji:'🌙', word2:'Map',      emoji2:'🗺️' },
+  { letter:'N', upper:'N', lower:'n', sound:'n',   word:'Nest',     emoji:'🪺', word2:'Nose',     emoji2:'👃' },
+  { letter:'O', upper:'O', lower:'o', sound:'o',   word:'Octopus',  emoji:'🐙', word2:'Orange',   emoji2:'🍊' },
+  { letter:'P', upper:'P', lower:'p', sound:'p',   word:'Pig',      emoji:'🐷', word2:'Pen',      emoji2:'✏️' },
+  { letter:'Q', upper:'Q', lower:'q', sound:'kw',  word:'Queen',    emoji:'👸', word2:'Quilt',    emoji2:'🛌' },
+  { letter:'R', upper:'R', lower:'r', sound:'r',   word:'Rabbit',   emoji:'🐰', word2:'Robot',    emoji2:'🤖' },
+  { letter:'S', upper:'S', lower:'s', sound:'s',   word:'Sun',      emoji:'☀️', word2:'Sock',     emoji2:'🧦' },
+  { letter:'T', upper:'T', lower:'t', sound:'t',   word:'Tiger',    emoji:'🐯', word2:'Top',      emoji2:'🌀' },
+  { letter:'U', upper:'U', lower:'u', sound:'u',   word:'Umbrella', emoji:'☂️', word2:'Up',       emoji2:'⬆️' },
+  { letter:'V', upper:'V', lower:'v', sound:'v',   word:'Van',      emoji:'🚐', word2:'Vest',     emoji2:'🦺' },
+  { letter:'W', upper:'W', lower:'w', sound:'w',   word:'Web',      emoji:'🕸️', word2:'Wig',      emoji2:'💇' },
+  { letter:'X', upper:'X', lower:'x', sound:'ks',  word:'Box',      emoji:'📦', word2:'Fox',      emoji2:'🦊' },
+  { letter:'Y', upper:'Y', lower:'y', sound:'y',   word:'Yo-yo',    emoji:'🪀', word2:'Yak',      emoji2:'🐃' },
+  { letter:'Z', upper:'Z', lower:'z', sound:'z',   word:'Zebra',    emoji:'🦓', word2:'Zip',      emoji2:'🤐' },
 ];
 
 const PHONICS_WORDS = [
-  { word:'cat', parts:['c','a','t'], sounds:['/k/','/æ/','/t/'],   emoji:'🐱' },
-  { word:'dog', parts:['d','o','g'], sounds:['/d/','/ɒ/','/g/'],   emoji:'🐶' },
-  { word:'sun', parts:['s','u','n'], sounds:['/s/','/ʌ/','/n/'],   emoji:'☀️' },
-  { word:'map', parts:['m','a','p'], sounds:['/m/','/æ/','/p/'],   emoji:'🗺️' },
-  { word:'pig', parts:['p','i','g'], sounds:['/p/','/ɪ/','/g/'],   emoji:'🐷' },
-  { word:'pen', parts:['p','e','n'], sounds:['/p/','/e/','/n/'],   emoji:'✏️' },
-  { word:'hat', parts:['h','a','t'], sounds:['/h/','/æ/','/t/'],   emoji:'🎩' },
-  { word:'bed', parts:['b','e','d'], sounds:['/b/','/e/','/d/'],   emoji:'🛏️' },
-  { word:'cup', parts:['c','u','p'], sounds:['/k/','/ʌ/','/p/'],   emoji:'☕' },
-  { word:'fox', parts:['f','o','x'], sounds:['/f/','/ɒ/','/ks/'],  emoji:'🦊' },
-  { word:'hen', parts:['h','e','n'], sounds:['/h/','/e/','/n/'],   emoji:'🐔' },
-  { word:'bus', parts:['b','u','s'], sounds:['/b/','/ʌ/','/s/'],   emoji:'🚌' },
-  { word:'log', parts:['l','o','g'], sounds:['/l/','/ɒ/','/g/'],   emoji:'🪵' },
-  { word:'net', parts:['n','e','t'], sounds:['/n/','/e/','/t/'],   emoji:'🥅' },
-  { word:'zip', parts:['z','i','p'], sounds:['/z/','/ɪ/','/p/'],   emoji:'🤐' },
-  { word:'red', parts:['r','e','d'], sounds:['/r/','/e/','/d/'],   emoji:'🔴' },
-  { word:'big', parts:['b','i','g'], sounds:['/b/','/ɪ/','/g/'],   emoji:'🐘' },
-  { word:'top', parts:['t','o','p'], sounds:['/t/','/ɒ/','/p/'],   emoji:'🌀' },
-  { word:'run', parts:['r','u','n'], sounds:['/r/','/ʌ/','/n/'],   emoji:'🏃' },
-  { word:'bit', parts:['b','i','t'], sounds:['/b/','/ɪ/','/t/'],   emoji:'🔷' },
+  { word:'cat', parts:['c','a','t'], sounds:['k','a','t'],   emoji:'🐱' },
+  { word:'bat', parts:['b','a','t'], sounds:['b','a','t'],   emoji:'🦇' },
+  { word:'hat', parts:['h','a','t'], sounds:['h','a','t'],   emoji:'🎩' },
+  { word:'mat', parts:['m','a','t'], sounds:['m','a','t'],   emoji:'🧺' },
+  { word:'dog', parts:['d','o','g'], sounds:['d','o','g'],   emoji:'🐶' },
+  { word:'log', parts:['l','o','g'], sounds:['l','o','g'],   emoji:'🪵' },
+  { word:'sun', parts:['s','u','n'], sounds:['s','u','n'],   emoji:'☀️' },
+  { word:'run', parts:['r','u','n'], sounds:['r','u','n'],   emoji:'🏃' },
+  { word:'pig', parts:['p','i','g'], sounds:['p','i','g'],   emoji:'🐷' },
+  { word:'dig', parts:['d','i','g'], sounds:['d','i','g'],   emoji:'⛏️' },
+  { word:'pen', parts:['p','e','n'], sounds:['p','e','n'],   emoji:'✏️' },
+  { word:'ten', parts:['t','e','n'], sounds:['t','e','n'],   emoji:'🔟' },
+  { word:'bed', parts:['b','e','d'], sounds:['b','e','d'],   emoji:'🛏️' },
+  { word:'red', parts:['r','e','d'], sounds:['r','e','d'],   emoji:'🔴' },
+  { word:'top', parts:['t','o','p'], sounds:['t','o','p'],   emoji:'🌀' },
+  { word:'mop', parts:['m','o','p'], sounds:['m','o','p'],   emoji:'🧹' },
+  { word:'hop', parts:['h','o','p'], sounds:['h','o','p'],   emoji:'🐸' },
+  { word:'map', parts:['m','a','p'], sounds:['m','a','p'],   emoji:'🗺️' },
+  { word:'cap', parts:['c','a','p'], sounds:['k','a','p'],   emoji:'🧢' },
+  { word:'can', parts:['c','a','n'], sounds:['k','a','n'],   emoji:'🥫' },
 ];
 
 const WORD_FAMILIES = [
-  { family:'-at', words:['cat','bat','hat','mat','rat'],    emoji:['🐱','🦇','🎩','🧺','🐀'] },
-  { family:'-an', words:['can','man','fan','pan','ran'],    emoji:['🥫','👨','🌀','🍳','🏃'] },
-  { family:'-op', words:['mop','top','hop','pop','cop'],    emoji:['🧹','🌀','🐸','🎈','👮'] },
-  { family:'-ig', words:['big','dig','fig','pig','wig'],    emoji:['🐘','⛏️','🍑','🐷','💇'] },
-  { family:'-ot', words:['dot','hot','lot','pot','got'],    emoji:['🔴','🔥','🎱','🫕','✅'] },
+  { family:'-at', words:['cat','bat','hat','mat','rat'], emoji:['🐱','🦇','🎩','🧺','🐀'] },
+  { family:'-an', words:['can','fan','man','pan','van'], emoji:['🥫','🌀','👨','🍳','🚐'] },
+  { family:'-op', words:['mop','top','hop','pop'],       emoji:['🧹','🌀','🐸','🎈'] },
+  { family:'-en', words:['pen','hen','ten'],             emoji:['✏️','🐔','🔟'] },
+  { family:'-ig', words:['pig','dig','big'],             emoji:['🐷','⛏️','🐘'] },
 ];
 
 const READ_WORDS = {
   level1: [
     { word:'cat', emoji:'🐱' }, { word:'dog', emoji:'🐶' }, { word:'pig', emoji:'🐷' },
-    { word:'hen', emoji:'🐔' }, { word:'cup', emoji:'☕' }, { word:'bus', emoji:'🚌' },
+    { word:'bat', emoji:'🦇' }, { word:'hat', emoji:'🎩' }, { word:'mat', emoji:'🧺' },
     { word:'sun', emoji:'☀️' }, { word:'map', emoji:'🗺️' }, { word:'pen', emoji:'✏️' },
-    { word:'hat', emoji:'🎩' }, { word:'bed', emoji:'🛏️' }, { word:'log', emoji:'🪵' },
-    { word:'fox', emoji:'🦊' }, { word:'net', emoji:'🥅' }, { word:'zip', emoji:'🤐' },
+    { word:'top', emoji:'🌀' }, { word:'bed', emoji:'🛏️' }, { word:'log', emoji:'🪵' },
+    { word:'hop', emoji:'🐸' }, { word:'red', emoji:'🔴' }, { word:'can', emoji:'🥫' },
+    { word:'run', emoji:'🏃' }, { word:'dig', emoji:'⛏️' }, { word:'ten', emoji:'🔟' },
+    { word:'mop', emoji:'🧹' }, { word:'cap', emoji:'🧢' },
   ],
   level2: [
     { word:'cat', emoji:'🐱', family:'-at' }, { word:'bat', emoji:'🦇', family:'-at' },
     { word:'hat', emoji:'🎩', family:'-at' }, { word:'mat', emoji:'🧺', family:'-at' },
-    { word:'can', emoji:'🥫', family:'-an' }, { word:'man', emoji:'👨', family:'-an' },
-    { word:'fan', emoji:'🌀', family:'-an' }, { word:'pan', emoji:'🍳', family:'-an' },
+    { word:'rat', emoji:'🐀', family:'-at' },
+    { word:'can', emoji:'🥫', family:'-an' }, { word:'fan', emoji:'🌀', family:'-an' },
+    { word:'man', emoji:'👨', family:'-an' }, { word:'pan', emoji:'🍳', family:'-an' },
+    { word:'van', emoji:'🚐', family:'-an' },
     { word:'mop', emoji:'🧹', family:'-op' }, { word:'top', emoji:'🌀', family:'-op' },
     { word:'hop', emoji:'🐸', family:'-op' }, { word:'pop', emoji:'🎈', family:'-op' },
-    { word:'big', emoji:'🐘', family:'-ig' }, { word:'pig', emoji:'🐷', family:'-ig' },
-    { word:'dot', emoji:'🔴', family:'-ot' }, { word:'hot', emoji:'🔥', family:'-ot' },
+    { word:'pen', emoji:'✏️', family:'-en' }, { word:'hen', emoji:'🐔', family:'-en' },
+    { word:'ten', emoji:'🔟', family:'-en' },
+    { word:'pig', emoji:'🐷', family:'-ig' }, { word:'dig', emoji:'⛏️', family:'-ig' },
+    { word:'big', emoji:'🐘', family:'-ig' },
   ],
   level3: [
-    { word:'the', emoji:'📖' }, { word:'and', emoji:'➕' }, { word:'is',  emoji:'✨' },
-    { word:'it',  emoji:'👆' }, { word:'in',  emoji:'📦' }, { word:'on',  emoji:'⬆️' },
-    { word:'at',  emoji:'📍' }, { word:'big', emoji:'🐘' }, { word:'can', emoji:'✅' },
-    { word:'run', emoji:'🏃' }, { word:'see', emoji:'👀' }, { word:'go',  emoji:'🚀' },
-    { word:'yes', emoji:'✅' }, { word:'no',  emoji:'❌' }, { word:'up',  emoji:'⬆️' },
+    { word:'I',   emoji:'👤', sentence:'I see a cat.' },
+    { word:'a',   emoji:'🔡', sentence:'I see a cat.' },
+    { word:'the', emoji:'📖', sentence:'See the dog.' },
+    { word:'go',  emoji:'🚀', sentence:'Go, go, go!' },
+    { word:'see', emoji:'👀', sentence:'I see a cat.' },
+    { word:'my',  emoji:'💛', sentence:'My hat.' },
   ],
 };
 
 const TRACE_MESSAGES = [
   'Great job! 🌟', 'Wonderful! 🎉', "You're a star! ⭐",
   'Amazing tracing! 🌈', 'Keep it up! 💪', 'Fantastic! 🎊',
-  'Super work! 🦸', 'Well done! 🥳',
+  'Super tracing! 🦸', 'Well done! 🥳',
+];
+
+const ENCOURAGING_MESSAGES = [
+  'Great job!', 'You did it!', 'Awesome!', 'Nice listening!',
+  'Super tracing!', "Let's keep going!", 'You found a star!',
 ];
 
 // Derived constant — use instead of the magic number 26.
@@ -107,9 +119,10 @@ const TRACE_MESSAGES = [
 const ALPHA_LEN = ALPHABET_DATA.length;
 
 const BADGES = [
-  { id:1, name:'Explorer Starter', icon:'🗺️', threshold:5  },
-  { id:2, name:'Sound Seeker',     icon:'🔊', threshold:10 },
-  { id:3, name:'Word Wizard',      icon:'📚', threshold:20 },
+  { id:1, name:'Sound Scout',     icon:'🔊', type:'correctAnswers', threshold:10,  desc:'10 correct answers'  },
+  { id:2, name:'Letter Explorer', icon:'🔤', type:'lettersTraced',  threshold:5,   desc:'5 letters traced'    },
+  { id:3, name:'Word Walker',     icon:'📖', type:'wordsRead',      threshold:10,  desc:'10 words read'       },
+  { id:4, name:'Reading Rocket',  icon:'🚀', type:'dailyComplete',  threshold:1,   desc:'Finish daily adventure' },
 ];
 
 // ==========================================
@@ -128,8 +141,26 @@ function defaultState() {
     tracing: { currentLetter:'A', showGuide:true },
     stars: 0,
     earnedBadges: [],
-    progress: { lettersLearned:[], wordsCompleted:[], gamesPlayed:0, gameScore:0 },
-    settings: { autoRead:true, learningMode:'mixed' },
+    progress: {
+      lettersLearned: [],
+      lettersTraced: 0,
+      wordsCompleted: [],
+      wordsRead: 0,
+      gamesPlayed: 0,
+      gameScore: 0,
+      correctAnswers: 0,
+      gamesWon: 0,
+      dailyComplete: 0,
+    },
+    settings: {
+      autoRead: true,
+      learningMode: 'mixed',
+      speechSpeed: 'normal',
+      uppercaseFirst: true,
+      phonicsFirst: false,
+      bedtimeMode: false,
+      voiceURI: '',
+    },
   };
 }
 
@@ -157,9 +188,17 @@ function speak(text, rate = 0.9, pitch = 1.1) {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(String(text));
-  utt.rate  = rate;
-  utt.pitch = pitch;
+  // Apply bedtime or slow-speech setting
+  const speedMod = (state.settings.bedtimeMode || state.settings.speechSpeed === 'slow') ? 0.65 : 1.0;
+  utt.rate  = rate * speedMod;
+  utt.pitch = state.settings.bedtimeMode ? 0.9 : pitch;
   utt.lang  = 'en-US';
+  // Apply chosen voice if set
+  if (state.settings.voiceURI) {
+    const voices = window.speechSynthesis.getVoices();
+    const v = voices.find(x => x.voiceURI === state.settings.voiceURI);
+    if (v) utt.voice = v;
+  }
   window.speechSynthesis.speak(utt);
 }
 
@@ -168,11 +207,7 @@ function speakLetter(letter) {
 }
 
 function speakSound(sound) {
-  const clean = String(sound).replace(/\//g, '').replace(/[æɒʌɪ]/g, ch => {
-    const map = { 'æ':'a', 'ɒ':'o', 'ʌ':'u', 'ɪ':'i' };
-    return map[ch] || ch;
-  });
-  speak(clean, 0.7, 1.2);
+  speak(String(sound), 0.7, 1.2);
 }
 
 function speakWord(word) {
@@ -247,12 +282,12 @@ function showScreen(id) {
   // Auto-read instruction on screen enter
   if (state.settings.autoRead && id !== 'home') {
     const readMap = {
-      letters:'Let\'s learn letters!',
-      trace:'Trace the letter!',
-      phonics:'Let\'s explore sounds!',
-      words:'Let\'s read some words!',
-      game:'Let\'s play a game!',
-      adventure:'Let\'s go on an adventure!',
+      letters:'Tap the letter. Listen to the letter name.',
+      trace:'Trace the letter. Start here.',
+      phonics:'Listen to the sound. Say it with me.',
+      words:'Tap each letter. Now read the word.',
+      game:'Listen carefully. Find the right answer.',
+      adventure:"Let's go on an adventure!",
       parents:'Parent Zone',
     };
     setTimeout(() => speak(readMap[id] || '', 0.9, 1.1), 400);
@@ -275,6 +310,12 @@ function updateGreeting() {
               : 'Good evening, Explorer! 🌙';
   const el = document.getElementById('greeting-text');
   if (el) el.textContent = greet;
+}
+
+function speakWelcome() {
+  if (state.settings.autoRead) {
+    setTimeout(() => speak('Welcome to English Explorer. Let\'s learn English together.', 0.85, 1.1), 600);
+  }
 }
 
 // ==========================================
@@ -516,6 +557,10 @@ function showTraceEncouragement() {
   }
   speak(msg.replace(/[^\w\s!]/g, ''), 1.0, 1.2);
   addStars(1);
+  // Track letters traced for Letter Explorer badge
+  state.progress.lettersTraced = (state.progress.lettersTraced || 0) + 1;
+  saveState();
+  checkBadgeMilestones();
 }
 
 function clearDrawCanvas() {
@@ -657,10 +702,16 @@ function showPhonicsTab(tab) {
   saveState();
 }
 
+const PHONICS_STAGE1_VOWELS = ['A','E','I','O','U'];
+const PHONICS_STAGE1_CONS   = ['B','C','D','F','G','H','M','N','P','S','T'];
+
 function renderPhonicsGrid() {
-  const grid = document.getElementById('phonics-letter-grid');
-  if (!grid) return;
-  grid.innerHTML = '';
+  const vowelsGrid = document.getElementById('phonics-vowels-grid');
+  const consGrid   = document.getElementById('phonics-cons-grid');
+  if (!vowelsGrid || !consGrid) return;
+  vowelsGrid.innerHTML = '';
+  consGrid.innerHTML   = '';
+
   ALPHABET_DATA.forEach(d => {
     const btn = document.createElement('button');
     btn.className   = 'phonics-ltr-btn';
@@ -671,7 +722,15 @@ function renderPhonicsGrid() {
       btn.classList.add('popping');
       setTimeout(() => btn.classList.remove('popping'), 350);
     };
-    grid.appendChild(btn);
+    if (PHONICS_STAGE1_VOWELS.includes(d.letter)) {
+      btn.classList.add('phonics-vowel');
+      vowelsGrid.appendChild(btn);
+    } else if (PHONICS_STAGE1_CONS.includes(d.letter)) {
+      btn.classList.add('phonics-cons');
+      consGrid.appendChild(btn);
+    } else {
+      consGrid.appendChild(btn);
+    }
   });
 }
 
@@ -761,15 +820,22 @@ function renderWordCard() {
 
   const lettersDiv = document.getElementById('rw-letters');
   lettersDiv.innerHTML = '';
-  entry.word.split('').forEach(ch => {
+  const word = entry.word;
+  const family = entry.family || '';
+  const endingLen = family.length > 1 ? family.length - 1 : 0; // -at → 'at' = 2 chars
+
+  word.split('').forEach((ch, idx) => {
     const btn = document.createElement('button');
-    btn.className   = 'rw-letter-btn';
+    btn.className = 'rw-letter-btn';
+    // Highlight the shared family ending
+    if (endingLen > 0 && idx >= word.length - endingLen) {
+      btn.classList.add('rw-family-end');
+    }
     btn.textContent = ch;
     btn.onclick = () => {
       speak(ch, 0.7, 1.2);
-      btn.style.background = '#FF6B6B';
-      btn.style.color = '#fff';
-      setTimeout(() => { btn.style.background = ''; btn.style.color = ''; }, 400);
+      btn.classList.add('rw-tapped');
+      setTimeout(() => btn.classList.remove('rw-tapped'), 400);
     };
     lettersDiv.appendChild(btn);
   });
@@ -783,6 +849,18 @@ function renderWordCard() {
     familyTag.style.display = 'none';
   }
 
+  // Sight word sentence display
+  const sentenceEl = document.getElementById('rw-sentence');
+  if (sentenceEl) {
+    if (entry.sentence) {
+      sentenceEl.textContent = entry.sentence;
+      sentenceEl.style.display = 'block';
+    } else {
+      sentenceEl.textContent = '';
+      sentenceEl.style.display = 'none';
+    }
+  }
+
   const counter = document.getElementById('word-counter');
   if (counter) counter.textContent = (state.currentWordIndex + 1) + ' / ' + list.length;
 
@@ -793,7 +871,9 @@ function renderWordCard() {
 function markWordCompleted(word) {
   if (!state.progress.wordsCompleted.includes(word)) {
     state.progress.wordsCompleted.push(word);
+    state.progress.wordsRead = (state.progress.wordsRead || 0) + 1;
     saveState();
+    checkBadgeMilestones();
   }
 }
 
@@ -821,9 +901,14 @@ function hearCurrentWord() {
 }
 
 function readWithMe() {
-  const word    = getCurrentWord();
+  const list  = READ_WORDS['level' + state.currentWordLevel];
+  const entry = list[state.currentWordIndex];
+  const word  = entry.word;
   const letters = word.split('');
-  let delay     = 0;
+  let delay = 0;
+
+  speak('Tap each letter.', 0.85, 1.1);
+  delay += 1200;
 
   // Spell out each letter
   letters.forEach(ch => {
@@ -831,12 +916,20 @@ function readWithMe() {
     delay += 650;
   });
 
-  // Blend slowly
-  setTimeout(() => speak(word, 0.55, 1.05), delay + 300);
+  // Now blend slowly
+  setTimeout(() => speak('Now blend the sounds.', 0.85, 1.1), delay);
+  delay += 1200;
+  setTimeout(() => speak(word, 0.55, 1.05), delay);
   delay += 1400;
 
   // Say normally
   setTimeout(() => speak(word, 0.9, 1.1), delay);
+  delay += 900;
+
+  // Read sentence aloud if sight word
+  if (entry.sentence) {
+    setTimeout(() => speak(entry.sentence, 0.8, 1.05), delay);
+  }
 
   addStars(1);
 }
@@ -1012,13 +1105,16 @@ function checkAnswer(given, correct, btn, container) {
 
   if (isCorrect) {
     btn.classList.add('correct');
-    document.getElementById('game-feedback').textContent = '⭐ Great job! 🎉';
-    speak('Great job!', 1.0, 1.3);
+    const msg = ENCOURAGING_MESSAGES[Math.floor(Math.random() * ENCOURAGING_MESSAGES.length)];
+    document.getElementById('game-feedback').textContent = '⭐ ' + msg + ' 🎉';
+    speak(msg, 1.0, 1.3);
     gameState.score++;
     document.getElementById('game-score').textContent = gameState.score;
     addStars(1);
     state.progress.gameScore++;
+    state.progress.correctAnswers = (state.progress.correctAnswers || 0) + 1;
     saveState();
+    checkBadgeMilestones();
   } else {
     btn.classList.add('wrong');
     // Highlight correct
@@ -1044,7 +1140,11 @@ function endGame() {
   document.getElementById('game-over').classList.remove('hidden');
   document.getElementById('final-score').textContent = gameState.score;
   addStars(gameState.score);
-  speak('Game over! You got ' + gameState.score + ' stars!', 0.9, 1.1);
+  if (gameState.score >= 3) {
+    state.progress.gamesWon = (state.progress.gamesWon || 0) + 1;
+    saveState();
+  }
+  speak('Well done! You got ' + gameState.score + ' stars!', 0.9, 1.1);
 }
 
 // ==========================================
@@ -1135,11 +1235,19 @@ function saveAdventureProgress(completed) {
 }
 
 function completeAdventureStep(index) {
+  const adventure = getDailyAdventure();
   const completed = getAdventureProgress();
   if (!completed.includes(index)) {
     completed.push(index);
     saveAdventureProgress(completed);
     addStars(1);
+    // Check if all steps done
+    if (completed.length >= adventure.steps.length) {
+      state.progress.dailyComplete = (state.progress.dailyComplete || 0) + 1;
+      saveState();
+      checkBadgeMilestones();
+      setTimeout(() => speak('Daily Adventure Complete! You are amazing!', 0.85, 1.2), 400);
+    }
   }
 }
 
@@ -1172,25 +1280,59 @@ function navigateToAdventureStep(step) {
 function initParentZone() {
   updateParentStats();
   updateBadgeDisplay();
+  populateVoiceList();
   // Load settings into UI
   const ar = document.getElementById('setting-autoread');
   if (ar) ar.checked = state.settings.autoRead;
   const sm = document.getElementById('setting-mode');
   if (sm) sm.value = state.settings.learningMode;
+  const ss = document.getElementById('setting-speed');
+  if (ss) ss.value = state.settings.speechSpeed || 'normal';
+  const uf = document.getElementById('setting-uppercase');
+  if (uf) uf.checked = state.settings.uppercaseFirst !== false;
+  const pf = document.getElementById('setting-phonics');
+  if (pf) pf.checked = !!state.settings.phonicsFirst;
+  const bm = document.getElementById('setting-bedtime');
+  if (bm) bm.checked = !!state.settings.bedtimeMode;
+  applyBedtimeMode();
+}
+
+function populateVoiceList() {
+  const sel = document.getElementById('setting-voice');
+  if (!sel || !window.speechSynthesis) return;
+  const voices = window.speechSynthesis.getVoices();
+  sel.innerHTML = '<option value="">Default voice</option>';
+  voices.filter(v => v.lang.startsWith('en')).forEach(v => {
+    const opt = document.createElement('option');
+    opt.value = v.voiceURI;
+    opt.textContent = v.name;
+    if (v.voiceURI === state.settings.voiceURI) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+function applyBedtimeMode() {
+  document.body.classList.toggle('bedtime-mode', !!state.settings.bedtimeMode);
 }
 
 function updateParentStats() {
   const ll = state.progress.lettersLearned.length;
+  const lt = state.progress.lettersTraced || 0;
   const wc = state.progress.wordsCompleted.length;
+  const wr = state.progress.wordsRead || 0;
   const gp = state.progress.gamesPlayed;
+  const gw = state.progress.gamesWon || 0;
 
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   const setW = (id, pct) => { const el = document.getElementById(id); if (el) el.style.width = Math.min(pct,100) + '%'; };
 
-  set('stat-letters', ll + ' / ' + ALPHA_LEN);
-  set('stat-words',   wc);
-  set('stat-games',   gp);
-  set('stat-stars',   state.stars);
+  set('stat-letters',       ll + ' / ' + ALPHA_LEN);
+  set('stat-letters-traced', lt);
+  set('stat-words',         wc);
+  set('stat-words-read',    wr);
+  set('stat-games',         gp);
+  set('stat-games-won',     gw);
+  set('stat-stars',         state.stars);
   setW('sb-letters', (ll / ALPHA_LEN) * 100);
   setW('sb-words',   Math.min((wc / 30) * 100, 100));
 }
@@ -1199,15 +1341,10 @@ function updateBadgeDisplay() {
   BADGES.forEach(badge => {
     const tile = document.getElementById('badge-tile-' + badge.id);
     const icon = document.getElementById('badge-icon-' + badge.id);
-    const earned = state.stars >= badge.threshold;
+    const earned = state.earnedBadges.includes(badge.id);
     if (tile) tile.classList.toggle('unlocked', earned);
     if (icon) icon.textContent = earned ? badge.icon : '🔒';
   });
-}
-
-function updateSetting(key, value) {
-  state.settings[key] = value;
-  saveState();
 }
 
 function confirmReset() {
@@ -1223,7 +1360,13 @@ function resetProgress() {
   updateParentStats();
   updateBadgeDisplay();
   updateStarsDisplay();
+  applyBedtimeMode();
   speak('Progress reset!', 0.9, 1.1);
+}
+
+function resetDailyAdventure() {
+  try { localStorage.removeItem('ee_adventure'); } catch(e) {}
+  speak('Daily Adventure reset!', 0.9, 1.1);
 }
 
 // ==========================================
@@ -1255,10 +1398,19 @@ function showStarPop() {
 
 function checkBadgeMilestones() {
   BADGES.forEach(badge => {
-    if (state.stars >= badge.threshold && !state.earnedBadges.includes(badge.id)) {
+    if (state.earnedBadges.includes(badge.id)) return;
+    let val = 0;
+    switch (badge.type) {
+      case 'correctAnswers': val = state.progress.correctAnswers || 0; break;
+      case 'lettersTraced':  val = state.progress.lettersTraced  || 0; break;
+      case 'wordsRead':      val = state.progress.wordsRead      || 0; break;
+      case 'dailyComplete':  val = state.progress.dailyComplete  || 0; break;
+    }
+    if (val >= badge.threshold) {
       state.earnedBadges.push(badge.id);
       saveState();
       showBadgePopup(badge);
+      launchConfetti();
     }
   });
   updateBadgeDisplay();
@@ -1271,8 +1423,41 @@ function showBadgePopup(badge) {
   el.classList.remove('hidden', 'showing');
   void el.offsetWidth;
   el.classList.add('showing');
-  speak('You earned a new badge: ' + badge.name + '!', 0.9, 1.2);
+  speak('You earned a new badge! ' + badge.name + '!', 0.9, 1.2);
   setTimeout(() => { el.classList.remove('showing'); el.classList.add('hidden'); }, 3200);
+}
+
+function launchConfetti() {
+  const container = document.getElementById('confetti-container');
+  if (!container) return;
+  const colors = ['#FF6B6B','#FFD93D','#4ECDC4','#45B7D1','#DDA0DD','#96CEB4'];
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left  = Math.random() * 100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDelay    = Math.random() * 0.6 + 's';
+    piece.style.animationDuration = (Math.random() * 1.2 + 1.2) + 's';
+    piece.style.width  = (Math.random() * 8 + 6) + 'px';
+    piece.style.height = (Math.random() * 8 + 6) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    container.appendChild(piece);
+    setTimeout(() => piece.remove(), 2800);
+  }
+}
+
+function updateSetting(key, value) {
+  state.settings[key] = value;
+  saveState();
+  if (key === 'bedtimeMode') applyBedtimeMode();
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen().catch(() => {});
+  }
 }
 
 // ==========================================
@@ -1283,17 +1468,21 @@ function init() {
   loadState();
   updateGreeting();
   updateStarsDisplay();
+  applyBedtimeMode();
 
   // Restore active screen (always start on home)
   showScreen('home');
+  speakWelcome();
 
   // Recover previously earned badges silently (no popup)
   updateBadgeDisplay();
 
-  // Warm up speech engine
+  // Warm up speech engine and populate voice list when ready
   if (window.speechSynthesis) {
     window.speechSynthesis.getVoices();
-    window.speechSynthesis.onvoiceschanged = () => {};
+    window.speechSynthesis.onvoiceschanged = () => {
+      populateVoiceList();
+    };
   }
 }
 
