@@ -27,20 +27,20 @@ const Rewards = (() => {
   ];
 
   const BADGES = [
-    { id: 'first_answer',  icon: '⭐', name: '첫 답변!',      condition: s => s.totalAnswered >= 1 },
-    { id: 'streak_3',      icon: '🔥', name: '3연속!',        condition: s => s.maxStreak >= 3 },
-    { id: 'streak_5',      icon: '🌟', name: '5연속!',        condition: s => s.maxStreak >= 5 },
-    { id: 'streak_10',     icon: '💫', name: '10연속!',       condition: s => s.maxStreak >= 10 },
-    { id: 'points_100',    icon: '🏅', name: '100점!',        condition: s => s.points >= 100 },
-    { id: 'points_500',    icon: '🥈', name: '500점!',        condition: s => s.points >= 500 },
-    { id: 'points_1000',   icon: '🥇', name: '1000점!',       condition: s => s.points >= 1000 },
-    { id: 'level_3',       icon: '🚀', name: '레벨 3!',       condition: s => s.level >= 3 },
-    { id: 'level_5',       icon: '🎉', name: '레벨 5!',       condition: s => s.level >= 5 },
-    { id: 'level_10',      icon: '👑', name: '레벨 10!',      condition: s => s.level >= 10 },
-    { id: 'correct_10',    icon: '🎯', name: '10문제 정답!',   condition: s => s.correctAnswered >= 10 },
-    { id: 'correct_50',    icon: '🏆', name: '50문제 정답!',   condition: s => s.correctAnswered >= 50 },
-    { id: 'correct_100',   icon: '💎', name: '100문제 정답!',  condition: s => s.correctAnswered >= 100 },
-    { id: 'all_modes', icon: '🌈', name: '모든 모드!', condition: s => {
+    { id: 'first_answer',  icon: '⭐', name: 'First Answer!',   condition: s => s.totalAnswered >= 1 },
+    { id: 'streak_3',      icon: '🔥', name: '3 in a Row!',     condition: s => s.maxStreak >= 3 },
+    { id: 'streak_5',      icon: '🌟', name: '5 in a Row!',     condition: s => s.maxStreak >= 5 },
+    { id: 'streak_10',     icon: '💫', name: '10 in a Row!',    condition: s => s.maxStreak >= 10 },
+    { id: 'points_100',    icon: '🏅', name: '100 Points!',     condition: s => s.points >= 100 },
+    { id: 'points_500',    icon: '🥈', name: '500 Points!',     condition: s => s.points >= 500 },
+    { id: 'points_1000',   icon: '🥇', name: '1,000 Points!',   condition: s => s.points >= 1000 },
+    { id: 'level_3',       icon: '🚀', name: 'Level 3!',        condition: s => s.level >= 3 },
+    { id: 'level_5',       icon: '🎉', name: 'Level 5!',        condition: s => s.level >= 5 },
+    { id: 'level_10',      icon: '👑', name: 'Level 10!',       condition: s => s.level >= 10 },
+    { id: 'correct_10',    icon: '🎯', name: '10 Correct!',     condition: s => s.correctAnswered >= 10 },
+    { id: 'correct_50',    icon: '🏆', name: '50 Correct!',     condition: s => s.correctAnswered >= 50 },
+    { id: 'correct_100',   icon: '💎', name: '100 Correct!',    condition: s => s.correctAnswered >= 100 },
+    { id: 'all_modes', icon: '🌈', name: 'All Modes!', condition: s => {
       const stats = s.modeStats || {};
       const modeKeys = ['numberRead','counting','addition','subtraction','placeValue','blocks3d'];
       return modeKeys.every(k => stats[k] > 0);

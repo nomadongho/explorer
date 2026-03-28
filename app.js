@@ -1,9 +1,69 @@
 /**
- * app.js — Main application logic for 수학 탐험대.
+ * app.js — Main application logic for Math Explorer.
  * Coordinates state, UI transitions, problem flow, rewards.
  *
  * Depends on: BigNum, Rewards, Problems, Blocks3D (loaded via script tags)
  */
+
+/* ══════════════════════════════════════════════════════════════════
+   STRINGS — Central English UI text (i18n-ready structure).
+   All user-facing text lives here.
+   ══════════════════════════════════════════════════════════════════ */
+const STRINGS = {
+  // Feedback messages
+  correctMsgs: ['Great job! 🎉', 'Amazing! 🌟', 'Perfect! ⭐', 'Awesome! 🏆', 'Fantastic! 🚀'],
+  wrongMsgs:   ['Try again! 💪', "That's OK, have another go! 😊", 'So close! 🌈', 'Keep trying! 👍'],
+
+  // Points popup
+  pointsPopup: (pts) => `+${pts} pts!`,
+
+  // Streak display
+  streakDisplay: (n, mult) => `🔥 ${n} in a row! ×${mult}`,
+
+  // Level-up sub-text (injected into #levelup-sub via JS)
+  levelUpSub: (n) => `You reached Level <strong>${n}</strong>!`,
+
+  // Badge toast
+  badgeToast: (badge) => `${badge.icon} Badge: ${badge.name}`,
+
+  // Parent gate instructions
+  gateIdle:    'Hold the button',
+  gateHolding: 'Holding... ⏳',
+
+  // Settings stats (each returns a <div> for innerHTML joining)
+  statTotal:    (n) => `<div>Total: <strong>${n}</strong></div>`,
+  statAccuracy: (n) => `<div>Accuracy: <strong>${n}%</strong></div>`,
+  statStreak:   (n) => `<div>Best streak: <strong>${n}</strong></div>`,
+  statPoints:   (n) => `<div>Points: <strong>${n.toLocaleString()}</strong></div>`,
+  statFav:      (mode) => `<div>Favourite: <strong>${mode}</strong></div>`,
+
+  // Max level text
+  maxLevel: 'Max!',
+
+  // Confirm reset
+  confirmReset: 'Reset all progress? This cannot be undone.',
+
+  // Auto-spin button labels
+  autoSpinStart: '▶ Auto Rotate',
+  autoSpinStop:  '⏹ Stop',
+
+  // Number reading instructions
+  numToWords: 'How do you say this number?',
+  wordsToNum: 'What number is this?',
+
+  // Place value instruction
+  placeValueQ: (place) => `What is the ${place} digit?`,
+
+  // Mode names (for stats display)
+  modeNames: {
+    numberRead:  'Number Reading',
+    counting:    'Counting',
+    addition:    'Addition',
+    subtraction: 'Subtraction',
+    placeValue:  'Place Value',
+    blocks3d:    '3D Blocks',
+  },
+};
 
 /* ══════════════════════════════════════════════════════════════════
    SPEECH — Stub. Wire to Web Speech API or TTS later.
@@ -13,7 +73,7 @@ function speakText(text) {
   // Web Speech API stub — enable when desired
   if ('speechSynthesis' in window) {
     const utt = new SpeechSynthesisUtterance(text);
-    utt.lang = 'ko-KR';
+    utt.lang = 'en-NZ';
     utt.rate = 0.85;
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utt);
@@ -121,7 +181,7 @@ const UI = (() => {
     if (blockRenderer) { blockRenderer.stopAutoSpin(); }
     autoSpinning = false;
     const btn = document.getElementById('btn-autospin');
-    if (btn) btn.textContent = '▶ 자동 회전';
+    if (btn) btn.textContent = STRINGS.autoSpinStart;
     showScreen('home-screen');
     refreshHome();
   }
@@ -143,7 +203,7 @@ const UI = (() => {
       const pct = Math.min(100, Math.round(((s.points - ptsCur) / (ptsNext - ptsCur)) * 100));
       _qs('#home-lvl-bar').style.width = pct + '%';
     } else {
-      _qs('#home-lvl-pts-next').textContent = '최고!';
+      _qs('#home-lvl-pts-next').textContent = STRINGS.maxLevel;
       _qs('#home-lvl-bar').style.width = '100%';
     }
 
@@ -217,17 +277,17 @@ const UI = (() => {
 
   /* ── Number Reading ──────────────────────────────────────────── */
   function renderNumberRead(p) {
-    const instr = p.type === 'numToKorean'
-      ? '이 숫자를 한국어로 읽으면?'
-      : '이 한국어를 숫자로 나타내면?';
+    const instr = p.type === 'numToWords'
+      ? STRINGS.numToWords
+      : STRINGS.wordsToNum;
     _qs('#nr-instruction').textContent = instr;
 
     const display = _qs('#nr-display');
-    if (p.type === 'numToKorean') {
+    if (p.type === 'numToWords') {
       display.className = 'question-number-big';
       display.textContent = p.display;
     } else {
-      display.className = 'question-korean-big';
+      display.className = 'question-words-big';
       display.textContent = p.display;
     }
 
@@ -317,8 +377,7 @@ const UI = (() => {
   /* ── Place Value ─────────────────────────────────────────────── */
   function renderPlaceValue(p) {
     _qs('#pv-number').textContent = p.displayNumber;
-    _qs('#pv-instruction').textContent =
-      `${p.targetPlace.place}의 숫자는 무엇일까요?`;
+    _qs('#pv-instruction').textContent = STRINGS.placeValueQ(p.targetPlace.place);
 
     // Visual: show digit columns
     const vis = _qs('#pv-visual');
@@ -364,7 +423,7 @@ const UI = (() => {
 
     autoSpinning = false;
     const btn = document.getElementById('btn-autospin');
-    if (btn) btn.textContent = '▶ 자동 회전';
+    if (btn) btn.textContent = STRINGS.autoSpinStart;
 
     renderChoices('b3d-choices', p.choices, p.correctChoice, 'blocks3d');
     _qs('#b3d-score').textContent = AppState.get().points;
@@ -399,7 +458,7 @@ const UI = (() => {
       AppState.save();
 
       showFeedback(prefix, true, pointsEarned, s.streak);
-      showPointsPopup('+' + pointsEarned + '점!');
+      showPointsPopup(STRINGS.pointsPopup(pointsEarned));
       if (s.animations !== false) {
         Rewards.confetti(_qs('#confetti-container'), 20);
       }
@@ -436,20 +495,18 @@ const UI = (() => {
   }
 
   /* ── Feedback ─────────────────────────────────────────────────── */
-  const CORRECT_MSGS = ['잘했어! 🎉','대단해! 🌟','완벽해! ⭐','최고야! 🏆','굉장해! 🚀'];
-  const WRONG_MSGS   = ['한 번 더 해보자! 💪','괜찮아, 다시 해봐! 😊','조금만 더! 🌈','틀려도 괜찮아! 👍'];
 
   function showFeedback(prefix, correct, pts, streak) {
     const el = _qs('#' + prefix + '-feedback');
     if (!el) return;
-    const msgs = correct ? CORRECT_MSGS : WRONG_MSGS;
+    const msgs = correct ? STRINGS.correctMsgs : STRINGS.wrongMsgs;
     el.textContent = msgs[Math.floor(Math.random() * msgs.length)];
     el.className = 'feedback-msg ' + (correct ? 'correct-msg' : 'wrong-msg');
 
     const streakEl = _qs('#' + prefix + '-streak');
     if (streakEl) {
       if (correct && streak >= 3) {
-        streakEl.textContent = '🔥 ' + streak + '연속 정답! ×' + Rewards.streakMultiplier(streak).toFixed(1);
+        streakEl.textContent = STRINGS.streakDisplay(streak, Rewards.streakMultiplier(streak).toFixed(1));
       } else {
         streakEl.textContent = '';
       }
@@ -498,7 +555,7 @@ const UI = (() => {
       'z-index:600','transition:transform 0.4s cubic-bezier(.18,.89,.32,1.28)',
       'white-space:nowrap',
     ].join(';');
-    el.textContent = `${badge.icon} 배지 획득: ${badge.name}`;
+    el.textContent = STRINGS.badgeToast(badge);
     document.body.appendChild(el);
     requestAnimationFrame(() => {
       el.style.transform = 'translateX(-50%) translateY(0)';
@@ -587,10 +644,10 @@ const UI = (() => {
     const btn = document.getElementById('btn-autospin');
     if (autoSpinning) {
       blockRenderer.startAutoSpin();
-      if (btn) btn.textContent = '⏹ 멈추기';
+      if (btn) btn.textContent = STRINGS.autoSpinStop;
     } else {
       blockRenderer.stopAutoSpin();
-      if (btn) btn.textContent = '▶ 자동 회전';
+      if (btn) btn.textContent = STRINGS.autoSpinStart;
     }
   }
 
@@ -614,7 +671,7 @@ const UI = (() => {
       const pct = Math.min(100, Math.round(((s.points - ptsCur) / (ptsNext - ptsCur)) * 100));
       _qs('#rew-lvl-bar').style.width = pct + '%';
     } else {
-      _qs('#rew-lvl-pts-next').textContent = '최고!';
+      _qs('#rew-lvl-pts-next').textContent = STRINGS.maxLevel;
       _qs('#rew-lvl-bar').style.width = '100%';
     }
 
@@ -626,7 +683,7 @@ const UI = (() => {
       const card = document.createElement('div');
       card.className = 'badge-card' + (earned ? '' : ' locked');
       card.setAttribute('role', 'listitem');
-      card.setAttribute('aria-label', badge.name + (earned ? ' 획득' : ' 미획득'));
+      card.setAttribute('aria-label', badge.name + (earned ? ' — earned' : ' — locked'));
       card.innerHTML = `<div class="badge-icon">${badge.icon}</div><div class="badge-name">${badge.name}</div>`;
       grid.appendChild(card);
     });
@@ -635,7 +692,7 @@ const UI = (() => {
   /* ── Parent gate ─────────────────────────────────────────────── */
   function openParentGate() {
     _qs('#parent-gate-modal').classList.add('open');
-    _qs('#gate-instruction').textContent = '버튼을 꾹 눌러요';
+    _qs('#gate-instruction').textContent = STRINGS.gateIdle;
     _qs('#gate-hold-progress').style.height = '0%';
   }
 
@@ -647,7 +704,7 @@ const UI = (() => {
   function gateHoldStart(e) {
     if (e) e.preventDefault();
     _gateHoldTime = Date.now();
-    _qs('#gate-instruction').textContent = '꾹 누르는 중... ⏳';
+    _qs('#gate-instruction').textContent = STRINGS.gateHolding;
 
     const progress = _qs('#gate-hold-progress');
     const DURATION = 2000;
@@ -670,7 +727,7 @@ const UI = (() => {
       gateHoldInterval = null;
     }
     _qs('#gate-hold-progress').style.height = '0%';
-    _qs('#gate-instruction').textContent = '버튼을 꾹 눌러요';
+    _qs('#gate-instruction').textContent = STRINGS.gateIdle;
   }
 
   /* ── Settings ────────────────────────────────────────────────── */
@@ -686,13 +743,12 @@ const UI = (() => {
     const acc = s.totalAnswered > 0
       ? Math.round((s.correctAnswered / s.totalAnswered) * 100) : 0;
     const favMode = Object.entries(s.modeStats || {}).filter(([,v]) => v > 0).sort((a,b) => b[1]-a[1])[0];
-    const modeNames = { numberRead:'숫자읽기', counting:'세기', addition:'더하기', subtraction:'빼기', placeValue:'자릿수', blocks3d:'3D블록' };
     statsEl.innerHTML = [
-      `<div>총 문제: <strong>${s.totalAnswered}</strong></div>`,
-      `<div>정확도: <strong>${acc}%</strong></div>`,
-      `<div>최고연속: <strong>${s.maxStreak}</strong></div>`,
-      `<div>총 점수: <strong>${(s.points||0).toLocaleString()}</strong></div>`,
-      favMode ? `<div>즐겨찾기: <strong>${modeNames[favMode[0]]||favMode[0]}</strong></div>` : '',
+      STRINGS.statTotal(s.totalAnswered),
+      STRINGS.statAccuracy(acc),
+      STRINGS.statStreak(s.maxStreak),
+      STRINGS.statPoints(s.points || 0),
+      favMode ? STRINGS.statFav(STRINGS.modeNames[favMode[0]] || favMode[0]) : '',
     ].join('');
 
     // Big number demo area
@@ -712,7 +768,7 @@ const UI = (() => {
   }
 
   function confirmReset() {
-    if (confirm('정말 모든 진행을 초기화할까요? 이 작업은 취소할 수 없어요.')) {
+    if (confirm(STRINGS.confirmReset)) {
       AppState.reset();
       closeSettings();
       refreshHome();
@@ -727,9 +783,9 @@ const UI = (() => {
     _qs('#bignum-A').textContent = BigNum.formatCommas(A);
     _qs('#bignum-B').textContent = BigNum.formatCommas(B);
     _qs('#bignum-sum').textContent = BigNum.formatCommas(sum);
-    // Korean reading (first 20 chars to keep it manageable)
-    const korean = BigNum.toKorean(A);
-    _qs('#bignum-korean').textContent = korean.length > 100 ? korean.slice(0,100) + '...' : korean;
+    // English reading (first 120 chars to keep it manageable)
+    const english = BigNum.toEnglish(A);
+    _qs('#bignum-korean').textContent = english.length > 120 ? english.slice(0, 120) + '...' : english;
     // Digit groups
     const digits = BigNum.toDigitArray(A).reverse();
     const grouped = digits.reduce((acc, d, i) => {
