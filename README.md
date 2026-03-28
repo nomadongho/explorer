@@ -128,3 +128,66 @@ Settings available:
 - High-contrast color palette
 - Minimum touch target size ≥ 44 × 44 px
 - Works on mobile (touch events handled)
+
+---
+
+## Google Ads Integration
+
+The app includes a ready-to-activate delayed ad system.  
+Ads appear only inside learning/play module screens — **never on the home or rewards screen**.
+
+### Where to put your real values
+
+Open **`js/ad-config.js`** and update the three key values:
+
+```js
+ADS_ENABLED:      false,                  // ← change to true to go live
+ADSENSE_CLIENT_ID: 'ca-pub-XXXXXXXXXXXXXXXX', // ← your publisher ID
+AD_SLOT_ID:       '1234567890',           // ← your ad slot number
+```
+
+Set `AD_TEST_MODE: false` when deploying to real traffic.
+
+### How the delayed display works
+
+1. A timer starts the moment the learner enters a module screen.
+2. Time is counted only while the browser tab is visible (tab-hidden pauses the countdown).
+3. After **60 seconds** of continuous visible time, the ad banner fades in at the bottom of the screen.
+4. Switching modules resets the timer.
+5. Returning to the home screen destroys the timer and removes the banner.
+
+The delay can be changed via `DELAY_MS` in `js/ad-config.js` (value is in milliseconds).
+
+### Screens that intentionally show NO ads
+
+| Screen | Reason |
+|--------|--------|
+| Home / landing screen | Entry point, mode selection — not a learning activity |
+| Rewards / level screen | Celebration/review view — not a learning activity |
+
+### Screens that show a delayed ad
+
+All six module/play screens show an ad after the 60-second delay:
+
+| Screen |
+|--------|
+| 🔢 Number Reading |
+| 🍎 Counting |
+| ➕ Addition |
+| ➖ Subtraction |
+| 📦 Place Value |
+| 🧊 3D Block Counting |
+
+### Files involved
+
+| File | Purpose |
+|------|---------|
+| `js/ad-config.js` | All configurable constants (edit this to go live) |
+| `js/ad-manager.js` | Timer logic, visibility pausing, banner injection |
+| `app.js` | Calls `AdManager.init()` on module entry and `AdManager.destroy()` on exit |
+
+### Disabling ads entirely
+
+Set `ADS_ENABLED: false` in `js/ad-config.js`.  
+When disabled, a subtle grey placeholder box appears after the delay instead of a real ad.  
+No Google scripts are loaded.

@@ -975,3 +975,71 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
   .mode-card { padding: 14px 8px 12px; }
   .mode-card-icon { font-size: 2rem; }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   AD BANNER
+   The banner is injected into the active module screen by ad-manager.js.
+   It is never added to the home screen or the rewards screen.
+   Height is reserved in advance to prevent layout shift; content fades in
+   after the 60-second delay.
+══════════════════════════════════════════════════════════════════════════ */
+
+/* Wrapper: sits at the bottom of each module screen, below all interactive
+   content.  Height is reserved even before the ad appears so there is no
+   sudden layout shift. */
+.ad-banner-wrap {
+  width: 100%;
+  max-width: 728px;
+  margin: 12px auto 0;
+  /* Reserve space before ad appears to avoid layout shift */
+  min-height: 60px;
+  box-sizing: border-box;
+  /* Starts transparent; fades to full opacity when the ad is ready */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  /* Ensure the banner never overlaps interactive elements */
+  pointer-events: none;
+}
+
+.ad-banner-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ad-banner-inner {
+  width: 100%;
+}
+
+/* ── Placeholder ─────────────────────────────────────────────────────────
+   Shown when ADS_ENABLED is false.  Visually reserves the same space a
+   real banner ad would use.  Kept subtle and child-friendly. */
+.ad-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  background: #f0f0f0;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  color: #bbb;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* ── Make quiz screens scroll past the ad without overlap ────────────────
+   Extra bottom padding so the Next button / choices are never hidden
+   behind the ad banner. */
+.quiz-screen {
+  padding-bottom: 16px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────
+   On small phones the banner spans full width; on tablets/desktops it is
+   capped at 728px (standard leaderboard width). */
+@media (max-width: 600px) {
+  .ad-banner-wrap {
+    max-width: 100%;
+  }
+}
