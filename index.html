@@ -212,6 +212,14 @@
 
   <!-- Earned badges strip -->
   <div id="home-badges" class="badges-strip mt-md" aria-label="Earned badges"></div>
+
+  <!-- Developer contact footer -->
+  <footer class="dev-footer">
+    <span>Contact the developer:</span>
+    <a id="dev-link-suggest" class="dev-footer-link">Suggest an idea</a>
+    <span class="dev-footer-sep" aria-hidden="true">·</span>
+    <a id="dev-link-report" class="dev-footer-link">Report a problem</a>
+  </footer>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
@@ -389,6 +397,24 @@
 <!-- ══════════════════════════════════════════════════════════════
      SCRIPTS — load modules then main app
 ══════════════════════════════════════════════════════════════ -->
+<script>
+  /* Developer contact footer — update APP_TITLE per project */
+  (function () {
+    var APP_TITLE    = 'Math Explorer';
+    var CONTACT_EMAIL = 'nomadongho@gmail.com';
+    var enc = encodeURIComponent;
+    var suggestHref =
+      'mailto:' + CONTACT_EMAIL +
+      '?subject=' + enc('[' + APP_TITLE + '] Suggestion') +
+      '&body='    + enc('Hi,\n\nI have an idea for ' + APP_TITLE + ':\n\n...\n');
+    var reportHref =
+      'mailto:' + CONTACT_EMAIL +
+      '?subject=' + enc('[' + APP_TITLE + '] Bug Report') +
+      '&body='    + enc('Hi,\n\nI found a problem in ' + APP_TITLE + '.\n\nWhat happened:\n...\n\nDevice/browser:\n...\n');
+    document.getElementById('dev-link-suggest').href = suggestHref;
+    document.getElementById('dev-link-report').href  = reportHref;
+  })();
+</script>
 <script src="modules/bignum.js"></script>
 <script src="modules/rewards.js"></script>
 <script src="modules/problems.js"></script>
