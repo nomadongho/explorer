@@ -6,6 +6,12 @@
 'use strict';
 
 // ==========================================
+// CONSTANTS
+// ==========================================
+// Derived after ALPHABET_DATA is defined below; referenced throughout the file.
+// Use ALPHA_LEN instead of the magic number 26 everywhere.
+
+// ==========================================
 // DATA
 // ==========================================
 
@@ -101,6 +107,9 @@ const TRACE_MESSAGES = [
   'Amazing tracing! 🌈', 'Keep it up! 💪', 'Fantastic! 🎊',
   'Super work! 🦸', 'Well done! 🥳',
 ];
+
+// Derived constant — use instead of the magic number 26
+const ALPHA_LEN = ALPHABET_DATA.length;
 
 const BADGES = [
   { id:1, name:'Explorer Starter', icon:'🗺️', threshold:5  },
@@ -349,14 +358,14 @@ function markLetterLearned(index) {
 }
 
 function prevLetter() {
-  state.currentLetterIndex = (state.currentLetterIndex - 1 + 26) % 26;
+  state.currentLetterIndex = (state.currentLetterIndex - 1 + ALPHA_LEN) % ALPHA_LEN;
   renderLetterScreen();
   renderProgressDots();
   saveState();
 }
 
 function nextLetter() {
-  state.currentLetterIndex = (state.currentLetterIndex + 1) % 26;
+  state.currentLetterIndex = (state.currentLetterIndex + 1) % ALPHA_LEN;
   renderLetterScreen();
   renderProgressDots();
   saveState();
@@ -429,7 +438,9 @@ function initTraceScreen() {
 }
 
 function setupDrawEvents(canvas) {
-  // Remove old listeners by cloning
+  // Cloning the canvas is the simplest way to remove all previously attached
+  // event listeners at once (avoids storing and passing references for each
+  // individual listener when the trace screen is re-entered).
   const fresh = canvas.cloneNode(true);
   canvas.parentNode.replaceChild(fresh, canvas);
   const dc = fresh;
@@ -624,7 +635,7 @@ function selectTraceLetter(letter) {
 
 function nextTraceLetter() {
   const idx = ALPHABET_DATA.findIndex(d => d.letter === state.tracing.currentLetter);
-  const next = ALPHABET_DATA[(idx + 1) % 26].letter;
+  const next = ALPHABET_DATA[(idx + 1) % ALPHA_LEN].letter;
   selectTraceLetter(next);
 }
 
@@ -922,7 +933,7 @@ function randInt(max) { return Math.floor(Math.random() * max); }
 
 // Game A: Find the Letter
 function genFindLetterQ() {
-  const correctIdx = randInt(26);
+  const correctIdx = randInt(ALPHA_LEN);
   const correct    = ALPHABET_DATA[correctIdx];
   const distractors = shuffleArray(ALPHABET_DATA.filter((_, i) => i !== correctIdx)).slice(0, 3);
   const options     = shuffleArray([correct, ...distractors]);
@@ -946,7 +957,7 @@ function genFindLetterQ() {
 
 // Game B: Find the Sound
 function genFindSoundQ() {
-  const correctIdx = randInt(26);
+  const correctIdx = randInt(ALPHA_LEN);
   const correct    = ALPHABET_DATA[correctIdx];
   const distractors = shuffleArray(ALPHABET_DATA.filter((_, i) => i !== correctIdx)).slice(0, 3);
   const options     = shuffleArray([correct, ...distractors]);
@@ -1083,21 +1094,28 @@ function initAdventureScreen() {
 }
 
 function getDailyAdventure() {
-  const day = new Date().getDate();
-  const lo  = (day * 3) % 26;
-  const wo  = (day * 5) % READ_WORDS.level1.length;
+  const now = new Date();
+  // Use year * 1000 + month * 31 + day so the seed is unique across months and years.
+  const seed = now.getFullYear() * 1000 + now.getMonth() * 31 + now.getDate();
+  const AL   = ALPHA_LEN;
+  const WL   = READ_WORDS.level1.length;
+  const lo   = (seed * 3) % AL;
+  const wo   = (seed * 5) % WL;
+
+  const l  = i => ALPHABET_DATA[(lo + i) % AL];
+  const w  = i => READ_WORDS.level1[(wo + i) % WL];
 
   return {
     steps: [
-      { type:'letter', data:ALPHABET_DATA[lo % 26].letter,     label:`Learn "${ALPHABET_DATA[lo % 26].letter}"`,         emoji:'🔤' },
-      { type:'letter', data:ALPHABET_DATA[(lo+1)%26].letter,   label:`Learn "${ALPHABET_DATA[(lo+1)%26].letter}"`,       emoji:'🔤' },
-      { type:'letter', data:ALPHABET_DATA[(lo+2)%26].letter,   label:`Learn "${ALPHABET_DATA[(lo+2)%26].letter}"`,       emoji:'🔤' },
-      { type:'trace',  data:ALPHABET_DATA[(lo+3)%26].letter,   label:`Trace "${ALPHABET_DATA[(lo+3)%26].letter}"`,       emoji:'✏️' },
-      { type:'trace',  data:ALPHABET_DATA[(lo+4)%26].letter,   label:`Trace "${ALPHABET_DATA[(lo+4)%26].letter}"`,       emoji:'✏️' },
-      { type:'word',   data:READ_WORDS.level1[wo % READ_WORDS.level1.length].word,     label:`Read "${READ_WORDS.level1[wo % READ_WORDS.level1.length].word}"`,     emoji: READ_WORDS.level1[wo % READ_WORDS.level1.length].emoji },
-      { type:'word',   data:READ_WORDS.level1[(wo+1)%READ_WORDS.level1.length].word,  label:`Read "${READ_WORDS.level1[(wo+1)%READ_WORDS.level1.length].word}"`,   emoji: READ_WORDS.level1[(wo+1)%READ_WORDS.level1.length].emoji },
-      { type:'word',   data:READ_WORDS.level1[(wo+2)%READ_WORDS.level1.length].word,  label:`Read "${READ_WORDS.level1[(wo+2)%READ_WORDS.level1.length].word}"`,   emoji: READ_WORDS.level1[(wo+2)%READ_WORDS.level1.length].emoji },
-      { type:'game',   data:'findLetter',                       label:'Play a Game!',                                     emoji:'🎮' },
+      { type:'letter', data:l(0).letter,  label:`Learn "${l(0).letter}"`,   emoji:'🔤' },
+      { type:'letter', data:l(1).letter,  label:`Learn "${l(1).letter}"`,   emoji:'🔤' },
+      { type:'letter', data:l(2).letter,  label:`Learn "${l(2).letter}"`,   emoji:'🔤' },
+      { type:'trace',  data:l(3).letter,  label:`Trace "${l(3).letter}"`,   emoji:'✏️' },
+      { type:'trace',  data:l(4).letter,  label:`Trace "${l(4).letter}"`,   emoji:'✏️' },
+      { type:'word',   data:w(0).word,    label:`Read "${w(0).word}"`,       emoji:w(0).emoji },
+      { type:'word',   data:w(1).word,    label:`Read "${w(1).word}"`,       emoji:w(1).emoji },
+      { type:'word',   data:w(2).word,    label:`Read "${w(2).word}"`,       emoji:w(2).emoji },
+      { type:'game',   data:'findLetter', label:'Play a Game!',              emoji:'🎮' },
     ],
   };
 }
@@ -1174,11 +1192,11 @@ function updateParentStats() {
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   const setW = (id, pct) => { const el = document.getElementById(id); if (el) el.style.width = Math.min(pct,100) + '%'; };
 
-  set('stat-letters', ll + ' / 26');
+  set('stat-letters', ll + ' / ' + ALPHA_LEN);
   set('stat-words',   wc);
   set('stat-games',   gp);
   set('stat-stars',   state.stars);
-  setW('sb-letters', (ll / 26) * 100);
+  setW('sb-letters', (ll / ALPHA_LEN) * 100);
   setW('sb-words',   Math.min((wc / 30) * 100, 100));
 }
 

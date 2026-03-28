@@ -1141,6 +1141,7 @@ input  { font-family: var(--font-b); }
   .game-select-grid { grid-template-columns: 1fr 1fr 1fr; }
 }
 @media (min-width: 700px) {
+  /* Intentionally overrides --top-h and --nav-h from :root for larger viewports. */
   :root { --top-h: 64px; --nav-h: 72px; }
   .letter-upper-display { font-size: 120px; }
   .letter-lower-display { font-size: 86px; }
