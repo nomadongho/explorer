@@ -589,3 +589,77 @@ button:focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 2px;
 }
+
+/* ── Ad Banner ───────────────────────────────────────────── */
+/*
+ * #module-ad-wrap is injected by AdManager into <body>.
+ * It sits at the bottom of the viewport and slides up after
+ * the delay. It is never rendered on the home screen.
+ */
+#module-ad-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;                      /* below header (100) but above content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(240, 244, 255, 0.96);
+  border-top: 1px solid rgba(95, 39, 205, 0.15);
+  padding: 6px 12px;
+  min-height: 60px;
+  max-height: 120px;
+  transform: translateY(100%);      /* starts off-screen */
+  transition: transform 0.4s ease;
+  pointer-events: none;             /* invisible until revealed */
+}
+
+#module-ad-wrap.ad-visible {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Extra bottom padding on the module screen so content never
+   hides behind the ad banner once it slides in.              */
+#main-content.has-module-ad {
+  padding-bottom: 100px;
+}
+
+/* Placeholder banner shown when ADS_ENABLED is false */
+.ad-placeholder {
+  width: 100%;
+  max-width: 728px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(95, 39, 205, 0.06);
+  border: 1px dashed rgba(95, 39, 205, 0.25);
+  border-radius: var(--radius-sm);
+}
+
+.ad-placeholder-label {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  color: var(--color-subtle);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* AdSense <ins> fill — applied when ADS_ENABLED is true */
+#module-ad-wrap .adsbygoogle {
+  width: 100%;
+  max-width: 728px;
+}
+
+@media (max-width: 640px) {
+  #module-ad-wrap {
+    padding: 4px 8px;
+    min-height: 52px;
+  }
+  #main-content.has-module-ad {
+    padding-bottom: 80px;
+  }
+}
