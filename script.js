@@ -3,6 +3,31 @@
 // ── Set current year in footer ─────────────────────────────
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// ── Contact the developer: mailto links ────────────────────
+const APP_TITLE = "Leo's Explorer";
+const CONTACT_EMAIL = 'nomadongho@gmail.com';
+
+function setMailtoHref(id, subject, body) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.href =
+    `mailto:${CONTACT_EMAIL}` +
+    `?subject=${encodeURIComponent(`[${APP_TITLE}] ${subject}`)}` +
+    `&body=${encodeURIComponent(body)}`;
+}
+
+setMailtoHref(
+  'link-suggest',
+  'Suggestion',
+  `Hi,\n\nI have an idea for ${APP_TITLE}:\n\n...\n`
+);
+
+setMailtoHref(
+  'link-report',
+  'Bug Report',
+  `Hi,\n\nI found a problem in ${APP_TITLE}.\n\nWhat happened:\n...\n\nDevice/browser:\n...\n`
+);
+
 // ── Intersection Observer for fade-in animations ───────────
 const fadeTargets = document.querySelectorAll('.fade-in, .journey__item');
 

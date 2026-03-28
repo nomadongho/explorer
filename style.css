@@ -458,6 +458,24 @@ ul { list-style: none; }
   opacity: 0.55;
 }
 
+.footer__contact {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.25rem;
+}
+
+.footer__contact-link {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer__contact-link:hover,
+.footer__contact-link:focus-visible {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+}
+
 /* ── Fade-in animation utility ────────────────────────────── */
 .fade-in {
   opacity: 0;
