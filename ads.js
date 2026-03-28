@@ -1,10 +1,11 @@
 /* ads.js - Ad placeholder banner (appears 60s after entering activity page) */
 
 (function () {
-  // Only show on activity pages (not index.html)
-  const isActivityPage = !window.location.pathname.endsWith('index.html') &&
-                         window.location.pathname !== '/' &&
-                         window.location.pathname !== '';
+  // Only show on activity pages (not index.html or root)
+  const path = window.location.pathname;
+  const isActivityPage = !path.endsWith('index.html') &&
+                         !path.endsWith('/') &&
+                         path !== '';
 
   if (!isActivityPage) return;
 
