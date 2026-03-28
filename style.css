@@ -976,6 +976,28 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
   .mode-card-icon { font-size: 2rem; }
 }
 
+/* ── Developer contact footer ──────────────────────────────────── */
+.dev-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 24px;
+  padding: 10px 0 4px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  font-size: 0.75rem;
+  color: var(--clr-text-light);
+}
+.dev-footer-link {
+  color: var(--clr-text-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition);
+}
+.dev-footer-link:hover { color: var(--clr-text); }
+.dev-footer-sep { opacity: 0.5; }
+
 /* ══════════════════════════════════════════════════════════════════════════
    AD BANNER
    The banner is injected into the active module screen by ad-manager.js.
