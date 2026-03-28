@@ -2,6 +2,19 @@
 
 const App = (() => {
 
+  /* ── App identity ─────────────────────────────────────────── */
+  const APP_TITLE = 'Clock Explorer';
+  const CONTACT_EMAIL = 'nomadongho@gmail.com';
+
+  function _mailtoLink(type) {
+    const isBug = type === 'bug';
+    const subject = isBug ? `[${APP_TITLE}] Bug Report` : `[${APP_TITLE}] Suggestion`;
+    const body = isBug
+      ? `Hi,\n\nI found a problem in ${APP_TITLE}.\n\nWhat happened:\n...\n\nDevice/browser:\n...\n`
+      : `Hi,\n\nI have an idea for ${APP_TITLE}:\n\n...\n`;
+    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
   /* ── Default settings & progress ──────────────────────────── */
   const DEFAULT_SETTINGS = {
     difficulty:      1,
@@ -152,6 +165,13 @@ const App = (() => {
 
       <!-- Confetti layer -->
       <div id="confetti-layer" aria-hidden="true"></div>
+
+      <footer id="contact-footer">
+        <span class="contact-footer-label">Contact the developer:</span>
+        <a class="contact-footer-link" href="${_mailtoLink('suggestion')}">Suggest an idea</a>
+        <span class="contact-footer-sep" aria-hidden="true">·</span>
+        <a class="contact-footer-link" href="${_mailtoLink('bug')}">Report a problem</a>
+      </footer>
     </div>`;
   }
 
