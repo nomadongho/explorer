@@ -16,10 +16,10 @@ const AdConfig = Object.freeze({
   ADS_ENABLED: false,
 
   /** Your AdSense publisher ID — replace with e.g. "ca-pub-1234567890123456" */
-  ADSENSE_CLIENT_ID: 'ca-pub-XXXXXXXXXXXXXXXX',
+  ADSENSE_CLIENT_ID: 'ca-pub-6962989029779783',
 
   /** Your ad slot ID — replace with the numeric ID from AdSense */
-  AD_SLOT_ID: '1234567890',
+  AD_SLOT_ID: '1672426542',
 
   /** Ad format passed to data-ad-format. Typical values: 'auto', 'rectangle', 'banner' */
   AD_FORMAT: 'auto',
@@ -28,8 +28,8 @@ const AdConfig = Object.freeze({
   AD_LAYOUT_KEY: '',
 
   /** Keep true during development so Google serves placeholder test ads instead of live ones */
-  AD_TEST_MODE: true,
+  AD_TEST_MODE: false,
 
   /** How many milliseconds a learner must spend in a module before the ad appears (default 60 s) */
-  DELAY_MS: 60000,
+  DELAY_MS: 0,
 });
