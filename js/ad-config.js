@@ -17,17 +17,17 @@ const AD_CONFIG = {
   // ── Enable / disable the entire ad system ──────────────────────────
   // Set to true when you have real Google Ads credentials.
   // When false, a visual placeholder is shown; no Google scripts load.
-  ADS_ENABLED: false,
+  ADS_ENABLED: true,
 
   // ── Publisher ID ───────────────────────────────────────────────────
   // TODO: Replace with your real AdSense publisher ID.
   // Example: 'ca-pub-1234567890123456'
-  ADSENSE_CLIENT_ID: 'ca-pub-XXXXXXXXXXXXXXXX',
+  ADSENSE_CLIENT_ID: 'ca-pub-6962989029779783',
 
   // ── Ad slot ID ─────────────────────────────────────────────────────
   // TODO: Replace with your real ad slot ID from Google AdSense.
   // Example: '9876543210'
-  AD_SLOT_ID: '1234567890',
+  AD_SLOT_ID: '1668662318',
 
   // ── Ad format ──────────────────────────────────────────────────────
   // 'auto' lets Google choose the best size for the slot.
@@ -40,9 +40,9 @@ const AD_CONFIG = {
   // ── Test mode ──────────────────────────────────────────────────────
   // Set to true to display Google test ads during development.
   // Must be false for real ad revenue in production.
-  AD_TEST_MODE: true,
+  AD_TEST_MODE: false,
 
   // Delay (in ms) before showing the ad after entering a module.
   // 60 * 1000 = 60 seconds of active (tab-visible) time.
-  AD_DELAY_MS: 60 * 1000,
+  AD_DELAY_MS: 0 * 1000,
 };
