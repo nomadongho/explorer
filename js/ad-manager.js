@@ -26,7 +26,7 @@ const AdManager = (() => {
   let _adShown     = false;  // true once the banner is revealed
   let _scriptLoaded = false; // true once the AdSense <script> has been injected
 
-  const _delayMs = () => (AD_CONFIG.AD_DELAY_SECONDS || 60) * 1000;
+  const _delayMs = () => (AD_CONFIG.AD_DELAY_SECONDS != null ? AD_CONFIG.AD_DELAY_SECONDS : 60) * 1000;
 
   /* ── Interval tick ───────────────────────────────────────── */
   function _startTick() {
