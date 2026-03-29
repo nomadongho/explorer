@@ -145,6 +145,12 @@ const AdManager = (() => { // eslint-disable-line no-unused-vars
 
     _container = _createBanner(screenEl);
 
+    // If no delay is required, show the ad immediately
+    if (AdConfig.DELAY_MS <= 0) {
+      _showAd();
+      return;
+    }
+
     document.addEventListener('visibilitychange', _handleVisibility);
 
     // Tick every second; only count visible time
