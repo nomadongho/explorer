@@ -12,14 +12,14 @@
 const AD_CONFIG = Object.freeze({
 
   /* ── Master toggle ────────────────────────────────────────── */
-  ADS_ENABLED: false,          // ← set to true to activate ads
+  ADS_ENABLED: true,          // ← set to true to activate ads
 
   /* ── Publisher credentials ───────────────────────────────── */
   // TODO: replace with your real AdSense publisher ID
-  ADSENSE_CLIENT_ID: 'ca-pub-XXXXXXXXXXXXXXXX',
+  ADSENSE_CLIENT_ID: 'ca-pub-6962989029779783',
 
   // TODO: replace with your real ad slot ID
-  AD_SLOT_ID: '1234567890',
+  AD_SLOT_ID: '1672426542',
 
   /* ── Ad display options ──────────────────────────────────── */
   AD_FORMAT: 'auto',           // 'auto' = responsive banner
