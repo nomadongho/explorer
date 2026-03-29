@@ -242,7 +242,7 @@ const COUNTING_OBJECTS = ["🌸", "⭐", "🐠", "🦋", "🍎", "🐸", "🌈",
 const ADSENSE_CONFIG = {
   publisherId: "ca-pub-6962989029779783",
   enabled: true,
-  delaySeconds: 5,
+  delaySeconds: 0,
   slots: {
     module:    "6729417308",
     miniGames: "6729417308",
