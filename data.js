@@ -240,14 +240,14 @@ const COUNTING_OBJECTS = ["🌸", "⭐", "🐠", "🦋", "🍎", "🐸", "🌈",
  * All AdSense settings live here so you only need to edit one place.
  */
 const ADSENSE_CONFIG = {
-  publisherId: "ca-pub-0000000000000000",
-  enabled: false,
+  publisherId: "ca-pub-6962989029779783",
+  enabled: true,
   delaySeconds: 5,
   slots: {
-    module:    "XXXXXXXXXX",
-    miniGames: "XXXXXXXXXX",
-    gamePlay:  "XXXXXXXXXX",
-    rewards:   "XXXXXXXXXX"
+    module:    "6729417308",
+    miniGames: "6729417308",
+    gamePlay:  "6729417308",
+    rewards:   "6729417308"
   }
 };
 
