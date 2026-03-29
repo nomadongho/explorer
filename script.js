@@ -404,12 +404,7 @@ function renderModuleView(mod) {
   }
 
   // Start ad timer for this view
-  const adEl = document.querySelector("#view-module .ad-placeholder");
-  if (adEl) {
-    adEl.classList.remove("visible");
-    clearTimeout(adTimer);
-    adTimer = setTimeout(() => adEl.classList.add("visible"), 60000);
-  }
+  startAdTimer("module");
 }
 
 function renderVocabCard(item, mod) {
