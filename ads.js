@@ -5,8 +5,8 @@
 /*   publisherId : found in AdSense → Account → Account information          */
 /*   adSlot      : found in AdSense → Ads → By ad unit                       */
 var AdsConfig = {
-  publisherId: 'ca-pub-XXXXXXXXXXXXXXXXX', // ← Your AdSense publisher ID
-  adSlot:      'XXXXXXXXXX',              // ← Your AdSense ad slot ID
+  publisherId: 'ca-pub-6962989029779783', // ← Your AdSense publisher ID
+  adSlot:      '4470716363',              // ← Your AdSense ad slot ID
   adFormat:    'auto',
   fullWidthResponsive: 'true',
 };
