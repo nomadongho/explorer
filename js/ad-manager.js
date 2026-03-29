@@ -154,7 +154,6 @@
     _adInjected = true;
 
     // Load the AdSense script once.
-    // TODO: Verify ADSENSE_CLIENT_ID in ad-config.js before enabling.
     if (!document.getElementById('adsense-script')) {
       const script    = document.createElement('script');
       script.id     = 'adsense-script';
@@ -169,7 +168,6 @@
     }
 
     // Replace the placeholder div with a real <ins> ad tag.
-    // TODO: Confirm AD_SLOT_ID in ad-config.js before enabling.
     const placeholder = document.getElementById('ad-placeholder');
     if (!placeholder) return;
 
