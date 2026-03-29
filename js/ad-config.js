@@ -20,13 +20,9 @@ const AD_CONFIG = {
   ADS_ENABLED: true,
 
   // ── Publisher ID ───────────────────────────────────────────────────
-  // TODO: Replace with your real AdSense publisher ID.
-  // Example: 'ca-pub-1234567890123456'
   ADSENSE_CLIENT_ID: 'ca-pub-6962989029779783',
 
   // ── Ad slot ID ─────────────────────────────────────────────────────
-  // TODO: Replace with your real ad slot ID from Google AdSense.
-  // Example: '9876543210'
   AD_SLOT_ID: '1668662318',
 
   // ── Ad format ──────────────────────────────────────────────────────
@@ -43,6 +39,6 @@ const AD_CONFIG = {
   AD_TEST_MODE: false,
 
   // Delay (in ms) before showing the ad after entering a module.
-  // 60 * 1000 = 60 seconds of active (tab-visible) time.
+  // 0 = show immediately upon entering a module screen.
   AD_DELAY_MS: 0 * 1000,
 };
