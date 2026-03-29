@@ -13,7 +13,7 @@
 /* global AdConfig */
 const AdConfig = Object.freeze({
   /** Set to true to serve real Google AdSense ads */
-  ADS_ENABLED: false,
+  ADS_ENABLED: true,
 
   /** Your AdSense publisher ID — replace with e.g. "ca-pub-1234567890123456" */
   ADSENSE_CLIENT_ID: 'ca-pub-6962989029779783',
