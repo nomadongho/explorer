@@ -148,6 +148,9 @@ const views = {
 let currentModule = null;   // active module config
 let adTimer = null;         // timer for delayed ad placeholder
 
+// Views that show ads (all non-home views)
+const AD_VIEWS = ["module", "miniGames", "gamePlay", "rewards"];
+
 function showView(viewName) {
   // Clear any existing ad timer
   clearTimeout(adTimer);
@@ -160,8 +163,7 @@ function showView(viewName) {
     target.addEventListener("animationend", () => target.classList.remove("fade-enter"), { once: true });
   }
 
-  // Show delayed ad placeholder on module/game views (not home/rewards)
-  if (["module", "miniGames", "gamePlay"].includes(viewName)) {
+  if (AD_VIEWS.includes(viewName)) {
     startAdTimer(viewName);
   } else {
     hideAdPlaceholder(viewName);
@@ -172,14 +174,60 @@ function startAdTimer(viewName) {
   const placeholder = document.querySelector(`#view-${kebab(viewName)} .ad-placeholder`);
   if (!placeholder) return;
   placeholder.classList.remove("visible");
+  const delay = ADSENSE_CONFIG.delaySeconds * 1000;
   adTimer = setTimeout(() => {
     placeholder.classList.add("visible");
-  }, 60000); // 60 seconds
+    // Trigger AdSense fill when the slot becomes visible
+    if (ADSENSE_CONFIG.enabled) {
+      const ins = placeholder.querySelector("ins.adsbygoogle");
+      if (ins && !ins.dataset.adsbygoogleStatus) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    }
+  }, delay);
 }
 
 function hideAdPlaceholder(viewName) {
   const placeholder = document.querySelector(`#view-${kebab(viewName)} .ad-placeholder`);
   if (placeholder) placeholder.classList.remove("visible");
+}
+
+/**
+ * Initialise Google AdSense.
+ * Injects the loader <script> into <head> and inserts an <ins> tag into
+ * every non-home view's .ad-placeholder container.
+ * Reads all settings from ADSENSE_CONFIG in data.js.
+ */
+function initAdsense() {
+  if (!ADSENSE_CONFIG.enabled || !ADSENSE_CONFIG.publisherId) return;
+
+  // Inject the AdSense loader script once
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CONFIG.publisherId}`;
+  script.crossOrigin = "anonymous";
+  document.head.appendChild(script);
+
+  // Map each view name to its HTML element ID and configured slot ID
+  const slotMap = {
+    module:    { viewId: "view-module",     slot: ADSENSE_CONFIG.slots.module },
+    miniGames: { viewId: "view-mini-games", slot: ADSENSE_CONFIG.slots.miniGames },
+    gamePlay:  { viewId: "view-game-play",  slot: ADSENSE_CONFIG.slots.gamePlay },
+    rewards:   { viewId: "view-rewards",    slot: ADSENSE_CONFIG.slots.rewards }
+  };
+
+  Object.values(slotMap).forEach(({ viewId, slot }) => {
+    if (!slot) return;
+    const container = document.querySelector(`#${viewId} .ad-placeholder`);
+    if (!container) return;
+    container.innerHTML =
+      `<ins class="adsbygoogle"` +
+      ` style="display:block"` +
+      ` data-ad-client="${ADSENSE_CONFIG.publisherId}"` +
+      ` data-ad-slot="${slot}"` +
+      ` data-ad-format="auto"` +
+      ` data-full-width-responsive="true"></ins>`;
+  });
 }
 
 function kebab(str) {
@@ -1147,6 +1195,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render home on start
   renderHome();
   showView("home");
+
+  // Initialise AdSense (reads ADSENSE_CONFIG from data.js)
+  initAdsense();
 
   // Mark module as completed when all audio played (simple heuristic)
   // This runs on progress save – mark module if >60% words heard

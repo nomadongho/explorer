@@ -229,6 +229,28 @@ const BADGES = [
 /** Counting objects for the numbers counting game */
 const COUNTING_OBJECTS = ["🌸", "⭐", "🐠", "🦋", "🍎", "🐸", "🌈", "🎈", "🍭", "🌺"];
 
+/**
+ * Google AdSense configuration
+ *
+ * ‣ publisherId  — your AdSense publisher ID (ca-pub-XXXXXXXXXXXXXXXX)
+ * ‣ enabled      — set to true once your AdSense account is approved
+ * ‣ delaySeconds — seconds after entering a page before the ad appears
+ * ‣ slots        — ad-unit slot IDs for each non-home view
+ *
+ * All AdSense settings live here so you only need to edit one place.
+ */
+const ADSENSE_CONFIG = {
+  publisherId: "ca-pub-0000000000000000",
+  enabled: false,
+  delaySeconds: 5,
+  slots: {
+    module:    "XXXXXXXXXX",
+    miniGames: "XXXXXXXXXX",
+    gamePlay:  "XXXXXXXXXX",
+    rewards:   "XXXXXXXXXX"
+  }
+};
+
 /** Word of the day – picks based on day of year */
 function getWordOfTheDay() {
   const allWords = [
