@@ -19,7 +19,7 @@ const AD_CONFIG = Object.freeze({
   ADSENSE_CLIENT_ID: 'ca-pub-6962989029779783',
 
   // TODO: replace with your real ad slot ID
-  AD_SLOT_ID: '1672426542',
+  AD_SLOT_ID: '6733181538',
 
   /* ── Ad display options ──────────────────────────────────── */
   AD_FORMAT: 'auto',           // 'auto' = responsive banner
