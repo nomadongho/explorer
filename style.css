@@ -926,10 +926,12 @@ h1, h2, h3 { line-height: 1.2; }
 }
 
 /* ============================================================
-   AD PLACEHOLDER (hidden by default, module/game pages only)
+   AD PLACEHOLDER (hidden by default, shown on non-home views)
+   Ad content is injected by initAdsense() in script.js using
+   settings from ADSENSE_CONFIG in data.js.
    ============================================================ */
 .ad-placeholder {
-  /* Hidden until 60 seconds after page entry — toggled by JS */
+  /* Hidden until delaySeconds after page entry — toggled by JS */
   display: none;
   background: #F5F5F5;
   border: 2px dashed #BDBDBD;
@@ -943,21 +945,6 @@ h1, h2, h3 { line-height: 1.2; }
   max-width: 52rem;
   margin-left: auto;
   margin-right: auto;
-
-  /* === FUTURE GOOGLE AD INTEGRATION ===
-     Replace the inner content with a standard Google AdSense snippet.
-     1. Replace data-ad-slot with your Ad Unit ID.
-     2. Replace data-ad-client with your AdSense publisher ID (ca-pub-XXXXXXXX).
-     3. Remove the placeholder text.
-     Example:
-       <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-XXXXXXXX"
-            data-ad-slot="XXXXXXXXXX"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  */
 }
 .ad-placeholder.visible { display: block; }
 .ad-placeholder-inner { line-height: 1.6; }
