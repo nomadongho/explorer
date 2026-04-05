@@ -241,7 +241,7 @@ const COUNTING_OBJECTS = ["🌸", "⭐", "🐠", "🦋", "🍎", "🐸", "🌈",
  */
 const ADSENSE_CONFIG = {
   publisherId: "ca-pub-6962989029779783",
-  enabled: true,
+  enabled: typeof window.ADS_ENABLED !== "undefined" ? !!window.ADS_ENABLED : false,
   delaySeconds: 0,
   slots: {
     module:    "6729417308",

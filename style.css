@@ -926,28 +926,27 @@ h1, h2, h3 { line-height: 1.2; }
 }
 
 /* ============================================================
-   AD PLACEHOLDER (hidden by default, shown on non-home views)
+   AD BAR (fixed bottom strip; hidden by default, shown on non-home views)
    Ad content is injected by initAdsense() in script.js using
    settings from ADSENSE_CONFIG in data.js.
    ============================================================ */
-.ad-placeholder {
-  /* Hidden until delaySeconds after page entry — toggled by JS */
+.ad-bar {
+  /* Hidden until JS adds "visible" */
   display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
   background: #F5F5F5;
-  border: 2px dashed #BDBDBD;
-  border-radius: var(--radius-md);
-  padding: 0.75rem 1rem;
+  border-top: 1px solid #BDBDBD;
+  padding: 0.25rem 0;
   text-align: center;
-  font-size: 0.72rem;
-  color: #9E9E9E;
-  font-weight: 700;
-  margin: 0 1rem 1rem;
-  max-width: 52rem;
-  margin-left: auto;
-  margin-right: auto;
 }
-.ad-placeholder.visible { display: block; }
-.ad-placeholder-inner { line-height: 1.6; }
+.ad-bar.visible { display: block; }
+
+/* Prevent content from hiding under the fixed ad bar when visible */
+body.ad-visible { padding-bottom: 90px; }
 
 /* ============================================================
    LOADING / TRANSITIONS
