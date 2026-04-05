@@ -197,6 +197,7 @@ const App = (() => {
     }
 
     function _startHold() {
+      clearInterval(holdTimer); // prevent double-start on mobile (touchstart + mousedown)
       holdStart = Date.now();
       _createHoldBar();
       holdTimer = setInterval(() => {
