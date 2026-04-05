@@ -124,6 +124,9 @@
 
   // ── Internal: reveal the ad banner ────────────────────────────────
   function _showAd() {
+    // Do nothing when ads are disabled (no container, no placeholder).
+    if (!AD_CONFIG.ADS_ENABLED) return;
+
     const container = document.getElementById('module-ad-container');
     if (!container) return;
 
@@ -142,10 +145,8 @@
       activeScroll.classList.add('ad-active-padding');
     }
 
-    // If real ads are enabled, load AdSense now.
-    if (AD_CONFIG.ADS_ENABLED) {
-      _injectAdSense();
-    }
+    // Load AdSense now.
+    _injectAdSense();
   }
 
   // ── Internal: inject real AdSense script and markup ───────────────
