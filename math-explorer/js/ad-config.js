@@ -2,8 +2,8 @@
  * Ad Configuration
  *
  * Ads are DISABLED by default.
- * To enable real Google AdSense ads, add ?ads=true to the page URL
- * (e.g. https://example.com/index.html?ads=true).
+ * To enable real Google AdSense ads, add ?ads=1 to the page URL
+ * (e.g. https://example.com/index.html?ads=1).
  *
  * Other settings:
  *   1. Replace ADSENSE_CLIENT_ID with your publisher ID  (ca-pub-XXXXXXXXXXXXXXXX).
@@ -13,10 +13,10 @@
  * These are the ONLY values you need to change. Everything else is automatic.
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-/* global AdConfig */
-const AdConfig = Object.freeze({
-  /** Ads are enabled when the URL contains ?ads=true */
-  ADS_ENABLED: new URLSearchParams(window.location.search).get('ads') === 'true',
+/* global AD_CONFIG */
+const AD_CONFIG = Object.freeze({
+  /** Ads are enabled when the URL contains ?ads=1 */
+  ADS_ENABLED: new URLSearchParams(window.location.search).get('ads') === '1',
 
   /** Your AdSense publisher ID — replace with e.g. "ca-pub-1234567890123456" */
   ADSENSE_CLIENT_ID: 'ca-pub-6962989029779783',

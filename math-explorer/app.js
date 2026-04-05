@@ -236,7 +236,7 @@ const UI = (() => {
     generateAndShowProblem(mode);
 
     // Start the delayed ad timer for this module screen
-    AdManager.init(document.getElementById(mode + '-screen'));
+    AdManager.init();
   }
 
   function modePrefix(mode) {

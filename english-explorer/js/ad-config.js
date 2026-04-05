@@ -48,5 +48,5 @@ const AD_CONFIG = {
 
   // Delay (in ms) before showing the ad after entering a module.
   // 0 = show immediately upon entering a module screen.
-  AD_DELAY_MS: 0 * 1000,
+  DELAY_MS: 0,
 };

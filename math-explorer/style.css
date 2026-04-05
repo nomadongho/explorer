@@ -1008,7 +1008,7 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
 
 /* Wrapper: fixed bar at the very bottom of the viewport so it never
    overlaps the interactive content above it. */
-.ad-banner-wrap {
+#module-ad-wrap {
   position: fixed;
   bottom: 0;
   left: 50%;
@@ -1028,13 +1028,9 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
   pointer-events: none;
 }
 
-.ad-banner-visible {
+#module-ad-wrap.ad-visible {
   opacity: 1;
   pointer-events: auto;
-}
-
-.ad-banner-inner {
-  width: 100%;
 }
 
 /* ── Placeholder ─────────────────────────────────────────────────────────
@@ -1058,7 +1054,7 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
 /* ── Make quiz screens scroll past the ad without overlap ────────────────
    Extra bottom padding so the Next button / choices are never hidden
    behind the fixed ad banner (60px height + 16px gap). */
-.quiz-screen {
+body.ad-visible .quiz-screen {
   padding-bottom: 76px;
 }
 
@@ -1066,7 +1062,7 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
    On small phones the banner spans full width; on tablets/desktops it is
    capped at 728px (standard leaderboard width). */
 @media (max-width: 600px) {
-  .ad-banner-wrap {
+  #module-ad-wrap {
     max-width: 100%;
   }
 }

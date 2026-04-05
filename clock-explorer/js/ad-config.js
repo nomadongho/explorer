@@ -32,6 +32,6 @@ const AD_CONFIG = Object.freeze({
   AD_TEST_MODE: false,
 
   /* ── Timing ──────────────────────────────────────────────── */
-  AD_DELAY_SECONDS: 0,        // seconds of visible time before the ad appears
+  DELAY_MS: 0,                // milliseconds of visible time before the ad appears
 
 });

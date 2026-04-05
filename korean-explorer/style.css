@@ -610,7 +610,7 @@ main {
   overflow: hidden;
 }
 
-#ad-banner.visible { display: block; }
+#ad-banner.ad-visible { display: block; }
 
 /* Push page content above the fixed ad banner */
 body.ad-visible { padding-bottom: 60px; }
