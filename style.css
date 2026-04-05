@@ -1308,7 +1308,7 @@ body.bedtime-mode .game-status-bar {
    See js/ad-config.js and js/ad-manager.js.
    ================================================ */
 :root {
-  --ad-h: 60px; /* height reserved for the ad banner */
+  --ad-h: 50px; /* height reserved for the ad banner */
 }
 
 .module-ad-container {
@@ -1381,5 +1381,5 @@ body.bedtime-mode .ad-placeholder-label {
 
 /* Responsive: bump ad height slightly on wide screens */
 @media (min-width: 700px) {
-  :root { --ad-h: 90px; }
+  :root { --ad-h: 60px; }
 }
