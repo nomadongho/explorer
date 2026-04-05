@@ -124,10 +124,6 @@ const AdManager = (() => { // eslint-disable-line no-unused-vars
 
     // Add body class so each explorer can hook CSS padding adjustments
     document.body.classList.add('ad-visible');
-
-    // Reserve bottom space so content is never hidden behind the ad
-    const main = document.getElementById('main-content');
-    if (main) main.classList.add('has-module-ad');
   }
 
   /** Pause or resume the countdown when the tab visibility changes. */
@@ -215,9 +211,7 @@ const AdManager = (() => { // eslint-disable-line no-unused-vars
     _adShown      = false;
     _ownContainer = false;
 
-    // Remove layout helper classes
-    const main = document.getElementById('main-content');
-    if (main) main.classList.remove('has-module-ad');
+    // Remove layout helper class
     document.body.classList.remove('ad-visible');
   }
 
