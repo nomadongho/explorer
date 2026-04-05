@@ -607,9 +607,9 @@ button:focus-visible {
   align-items: center;
   background: rgba(240, 244, 255, 0.96);
   border-top: 1px solid rgba(95, 39, 205, 0.15);
-  padding: 6px 12px;
-  min-height: 60px;
-  max-height: 120px;
+  padding: 4px 8px;
+  min-height: 50px;
+  max-height: 70px;
   transform: translateY(100%);      /* starts off-screen */
   transition: transform 0.4s ease;
   pointer-events: none;             /* invisible until revealed */
@@ -623,7 +623,7 @@ button:focus-visible {
 /* Extra bottom padding on the module screen so content never
    hides behind the ad banner once it slides in.              */
 #main-content.has-module-ad {
-  padding-bottom: 100px;
+  padding-bottom: 60px;
 }
 
 /* Placeholder banner shown when ADS_ENABLED is false */
@@ -656,11 +656,11 @@ button:focus-visible {
 
 @media (max-width: 640px) {
   #module-ad-wrap {
-    padding: 4px 8px;
-    min-height: 52px;
+    padding: 2px 6px;
+    min-height: 50px;
   }
   #main-content.has-module-ad {
-    padding-bottom: 80px;
+    padding-bottom: 58px;
   }
 }
 
