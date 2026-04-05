@@ -1311,7 +1311,7 @@ body.bedtime-mode .game-status-bar {
   --ad-h: 50px; /* height reserved for the ad banner */
 }
 
-.module-ad-container {
+#module-ad-wrap {
   position: fixed;
   bottom: var(--nav-h);
   left: 0;
@@ -1331,14 +1331,14 @@ body.bedtime-mode .game-status-bar {
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.module-ad-container.ad-visible {
+#module-ad-wrap.ad-visible {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
 /* Extra bottom padding added to .screen-scroll while the ad is showing */
-.screen-scroll.ad-active-padding {
+body.ad-visible .screen-scroll {
   padding-bottom: calc(var(--nav-h) + var(--ad-h) + 16px);
 }
 
@@ -1367,7 +1367,7 @@ body.bedtime-mode .game-status-bar {
 }
 
 /* Bedtime mode: keep the ad bar dark */
-body.bedtime-mode .module-ad-container {
+body.bedtime-mode #module-ad-wrap {
   background: #16213E;
   border-top-color: #2A2A4A;
 }

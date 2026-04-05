@@ -230,11 +230,15 @@ function speakWord(word) {
 // SCREEN NAVIGATION
 // ==========================================
 
+// Screens that show a delayed ad banner.
+// Home ('home') and Parent Zone ('parents') are intentionally excluded.
+const MODULE_SCREENS = new Set(['letters', 'trace', 'phonics', 'words', 'game', 'adventure']);
+
 let autoPlayTimer = null;
 
 function showScreen(id) {
   // Cancel any active ad timer from the previous screen.
-  destroyDelayedModuleAd();
+  AdManager.destroy();
 
   // Stop auto-play if leaving letters screen
   if (id !== 'letters' && autoPlayTimer) {
@@ -309,8 +313,7 @@ function showScreen(id) {
   }
 
   // Start the delayed ad countdown for module screens.
-  // initDelayedModuleAd ignores home and parent-zone screens automatically.
-  initDelayedModuleAd(id);
+  AdManager.init({ screenId: id, allowedScreens: MODULE_SCREENS });
 }
 
 function navigateFromHome(screenId, name) {

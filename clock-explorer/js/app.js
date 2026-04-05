@@ -237,7 +237,7 @@ const App = (() => {
      MODE SELECTOR
   ══════════════════════════════════════════════════════════════ */
   function showModeSelector() {
-    AdManager.destroyDelayedModuleAd(); // no ads on the home screen
+    AdManager.destroy(); // no ads on the home screen
     _destroyActiveClocks();
     currentMode = null;
     Utils.saveToStorage('ce_lastMode', null);
@@ -286,7 +286,7 @@ const App = (() => {
     }
 
     // Start the delayed ad timer — resets automatically if switching between modules
-    AdManager.initDelayedModuleAd();
+    AdManager.init();
   }
 
   function _modeHeader(title) {
