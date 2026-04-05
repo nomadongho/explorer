@@ -235,7 +235,7 @@ const COUNTING_OBJECTS = ["🌸", "⭐", "🐠", "🦋", "🍎", "🐸", "🌈",
  * ‣ publisherId  — your AdSense publisher ID (ca-pub-XXXXXXXXXXXXXXXX)
  * ‣ enabled      — set to true once your AdSense account is approved
  * ‣ delaySeconds — seconds after entering a page before the ad appears
- * ‣ slots        — ad-unit slot IDs for each non-home view
+ * ‣ slots        — ad-unit slot ID for the bottom banner bar
  *
  * All AdSense settings live here so you only need to edit one place.
  */
@@ -244,10 +244,7 @@ const ADSENSE_CONFIG = {
   enabled: typeof window.ADS_ENABLED !== "undefined" ? !!window.ADS_ENABLED : false,
   delaySeconds: 0,
   slots: {
-    module:    "6729417308",
-    miniGames: "6729417308",
-    gamePlay:  "6729417308",
-    rewards:   "6729417308"
+    banner: "6729417308"
   }
 };
 

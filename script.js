@@ -213,12 +213,12 @@ function initAdsense() {
 
   // Insert a single <ins> tag into the bottom ad bar
   const bar = document.getElementById("ad-bar");
-  if (bar && ADSENSE_CONFIG.slots.module) {
+  if (bar && ADSENSE_CONFIG.slots.banner) {
     bar.innerHTML =
       `<ins class="adsbygoogle"` +
       ` style="display:block"` +
       ` data-ad-client="${ADSENSE_CONFIG.publisherId}"` +
-      ` data-ad-slot="${ADSENSE_CONFIG.slots.module}"` +
+      ` data-ad-slot="${ADSENSE_CONFIG.slots.banner}"` +
       ` data-ad-format="auto"` +
       ` data-full-width-responsive="true"></ins>`;
   }
