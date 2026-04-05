@@ -707,6 +707,7 @@ const UI = (() => {
 
   function gateHoldStart(e) {
     if (e) e.preventDefault();
+    if (gateHoldInterval) { clearInterval(gateHoldInterval); gateHoldInterval = null; }
     _gateHoldTime = Date.now();
     _qs('#gate-instruction').textContent = STRINGS.gateHolding;
 

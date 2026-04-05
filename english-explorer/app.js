@@ -3,6 +3,7 @@
    Complete interactive kids English learning app
    ============================================= */
 
+(function () {
 'use strict';
 
 // ==========================================
@@ -1510,3 +1511,40 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+// ── Expose functions required by inline HTML handlers ──────────
+window.showScreen           = showScreen;
+window.navigateFromHome     = navigateFromHome;
+window.startParentHold      = startParentHold;
+window.cancelParentHold     = cancelParentHold;
+window.toggleFullscreen     = toggleFullscreen;
+window.onHearLetter         = onHearLetter;
+window.onHearSound          = onHearSound;
+window.onHearWord           = onHearWord;
+window.onHearWord2          = onHearWord2;
+window.prevLetter           = prevLetter;
+window.nextLetter           = nextLetter;
+window.toggleAutoPlay       = toggleAutoPlay;
+window.clearDrawCanvas      = clearDrawCanvas;
+window.toggleGuide          = toggleGuide;
+window.speakCurrentTraceLetter = speakCurrentTraceLetter;
+window.nextTraceLetter      = nextTraceLetter;
+window.showPhonicsTab       = showPhonicsTab;
+window.prevPhonicsWord      = prevPhonicsWord;
+window.nextPhonicsWord      = nextPhonicsWord;
+window.blendWord            = blendWord;
+window.blendWordSlow        = blendWordSlow;
+window.setWordLevel         = setWordLevel;
+window.hearCurrentWord      = hearCurrentWord;
+window.readWithMe           = readWithMe;
+window.prevWord             = prevWord;
+window.nextWord             = nextWord;
+window.startGame            = startGame;
+window.quitGame             = quitGame;
+window.playGameQuestion     = playGameQuestion;
+window.showGameSelector     = showGameSelector;
+window.confirmReset         = confirmReset;
+window.resetDailyAdventure  = resetDailyAdventure;
+window.updateSetting        = updateSetting;
+
+})();
