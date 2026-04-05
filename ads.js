@@ -1,5 +1,12 @@
 /* ads.js - Google AdSense configuration and banner (activity pages only) */
 
+/* ── Enable ads ──────────────────────────────────────────────────────────── */
+/* Ads are disabled by default. To enable, set this variable to true BEFORE  */
+/* loading this script:                                                        */
+/*   <script>window.ADS_ENABLED = true;</script>                              */
+/*   <script src="ads.js"></script>                                            */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 /* ── AdSense settings (edit here only) ──────────────────────────────────── */
 /* IMPORTANT: Replace the values below with your actual AdSense credentials  */
 /*   publisherId : found in AdSense → Account → Account information          */
@@ -13,6 +20,9 @@ var AdsConfig = {
 /* ─────────────────────────────────────────────────────────────────────────── */
 
 (function () {
+  // Ads are disabled by default; activate by setting window.ADS_ENABLED = true
+  if (!window.ADS_ENABLED) return;
+
   // Only show on activity pages (not index.html or root)
   var path = window.location.pathname;
   var isActivityPage = !path.endsWith('index.html') &&
@@ -53,6 +63,7 @@ var AdsConfig = {
     while (banner.firstChild) banner.removeChild(banner.firstChild);
     banner.appendChild(ins);
     banner.classList.add('visible');
+    document.body.classList.add('ad-visible');
 
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }

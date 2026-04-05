@@ -602,14 +602,18 @@ main {
   right: 0;
   background: #fff;
   border-top: 1px solid #e2e8f0;
-  padding: 6px 0;
+  padding: 2px 0;
   text-align: center;
   display: none;
   z-index: 90;
-  min-height: 60px;
+  max-height: 60px;
+  overflow: hidden;
 }
 
 #ad-banner.visible { display: block; }
+
+/* Push page content above the fixed ad banner */
+body.ad-visible { padding-bottom: 60px; }
 
 /* ─── FOOTER ──────────────────────────────────── */
 footer {
