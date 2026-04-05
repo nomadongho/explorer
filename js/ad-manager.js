@@ -29,8 +29,8 @@ const AdManager = (() => { // eslint-disable-line no-unused-vars
 
   // ── DOM helpers ───────────────────────────────────────────────────────────
 
-  /** Build and append the banner wrapper to the given screen. */
-  function _createBanner(screenEl) {
+  /** Build and append the banner wrapper to the document body (fixed bottom bar). */
+  function _createBanner() {
     const wrap = document.createElement('div');
     wrap.className  = 'ad-banner-wrap';
     wrap.id         = 'module-ad-banner';
@@ -42,7 +42,7 @@ const AdManager = (() => { // eslint-disable-line no-unused-vars
     inner.className = 'ad-banner-inner';
     wrap.appendChild(inner);
 
-    screenEl.appendChild(wrap);
+    document.body.appendChild(wrap);
     return wrap;
   }
 
@@ -138,12 +138,15 @@ const AdManager = (() => { // eslint-disable-line no-unused-vars
   function init(screenEl) {
     destroy(); // clean up any running ad from a previous module
 
+    // Do nothing when ads are disabled
+    if (!AdConfig.ADS_ENABLED) return;
+
     _screenEl  = screenEl;
     _elapsed   = 0;
     _paused    = document.hidden;
     _adShown   = false;
 
-    _container = _createBanner(screenEl);
+    _container = _createBanner();
 
     // If no delay is required, show the ad immediately
     if (AdConfig.DELAY_MS <= 0) {
