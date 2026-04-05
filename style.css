@@ -1006,20 +1006,25 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
    after the 60-second delay.
 ══════════════════════════════════════════════════════════════════════════ */
 
-/* Wrapper: sits at the bottom of each module screen, below all interactive
-   content.  Height is reserved even before the ad appears so there is no
-   sudden layout shift. */
+/* Wrapper: fixed bar at the very bottom of the viewport so it never
+   overlaps the interactive content above it. */
 .ad-banner-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   max-width: 728px;
-  margin: 12px auto 0;
   /* Reserve space before ad appears to avoid layout shift */
   min-height: 60px;
   box-sizing: border-box;
+  background: #fff;
+  border-top: 1px solid #eee;
+  z-index: 900;
   /* Starts transparent; fades to full opacity when the ad is ready */
   opacity: 0;
   transition: opacity 0.5s ease;
-  /* Ensure the banner never overlaps interactive elements */
+  /* Ensure the banner never intercepts taps before the ad is ready */
   pointer-events: none;
 }
 
@@ -1052,9 +1057,9 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
 
 /* ── Make quiz screens scroll past the ad without overlap ────────────────
    Extra bottom padding so the Next button / choices are never hidden
-   behind the ad banner. */
+   behind the fixed ad banner (60px height + 16px gap). */
 .quiz-screen {
-  padding-bottom: 16px;
+  padding-bottom: 76px;
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────────

@@ -1,19 +1,22 @@
 /* ═══════════════════════════════════════════════════════════════════════════
  * Ad Configuration
  *
- * To enable real Google AdSense ads:
- *   1. Set ADS_ENABLED to true.
- *   2. Replace ADSENSE_CLIENT_ID with your publisher ID  (ca-pub-XXXXXXXXXXXXXXXX).
- *   3. Replace AD_SLOT_ID with your real ad slot number.
- *   4. Set AD_TEST_MODE to false for live traffic.
+ * Ads are DISABLED by default.
+ * To enable real Google AdSense ads, add ?ads=true to the page URL
+ * (e.g. https://example.com/index.html?ads=true).
+ *
+ * Other settings:
+ *   1. Replace ADSENSE_CLIENT_ID with your publisher ID  (ca-pub-XXXXXXXXXXXXXXXX).
+ *   2. Replace AD_SLOT_ID with your real ad slot number.
+ *   3. Set AD_TEST_MODE to false for live traffic.
  *
  * These are the ONLY values you need to change. Everything else is automatic.
  * ═══════════════════════════════════════════════════════════════════════════ */
 
 /* global AdConfig */
 const AdConfig = Object.freeze({
-  /** Set to true to serve real Google AdSense ads */
-  ADS_ENABLED: true,
+  /** Ads are enabled when the URL contains ?ads=true */
+  ADS_ENABLED: new URLSearchParams(window.location.search).get('ads') === 'true',
 
   /** Your AdSense publisher ID — replace with e.g. "ca-pub-1234567890123456" */
   ADSENSE_CLIENT_ID: 'ca-pub-6962989029779783',
