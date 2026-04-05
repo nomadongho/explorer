@@ -152,6 +152,8 @@ const AdManager = (() => {
    * continuous visible time the banner slides into view.
    */
   function initDelayedModuleAd() {
+    if (!AD_CONFIG.ADS_ENABLED) return;   // ads disabled — nothing to show
+
     destroyDelayedModuleAd();   // always reset before starting a new session
 
     _wrap    = _buildWrap();
@@ -161,7 +163,7 @@ const AdManager = (() => {
     document.body.appendChild(_wrap);
     document.addEventListener('visibilitychange', _onVisibilityChange);
 
-    if (AD_CONFIG.ADS_ENABLED) _loadAdSenseScript();
+    _loadAdSenseScript();
 
     // Only start counting if the tab is already visible
     if (!document.hidden) _startTick();
