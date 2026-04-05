@@ -140,9 +140,6 @@
         </button>
       </div>
 
-      <!-- Ad slot (hidden; visible after delay — populated by initAdsense() in script.js) -->
-      <div class="ad-placeholder" aria-hidden="true"></div>
-
     </div>
     <!-- / view-module -->
 
@@ -169,9 +166,6 @@
         </button>
       </div>
 
-      <!-- Ad slot (hidden; visible after delay — populated by initAdsense() in script.js) -->
-      <div class="ad-placeholder" aria-hidden="true"></div>
-
     </div>
     <!-- / view-mini-games -->
 
@@ -192,9 +186,6 @@
       <div class="game-play-area" id="game-play-content" aria-live="polite">
         <!-- Rendered by game functions in script.js -->
       </div>
-
-      <!-- Ad slot (hidden; visible after delay — populated by initAdsense() in script.js) -->
-      <div class="ad-placeholder" aria-hidden="true"></div>
 
     </div>
     <!-- / view-game-play -->
@@ -239,9 +230,6 @@
 
       </div>
 
-      <!-- Ad slot (hidden; visible after delay — populated by initAdsense() in script.js) -->
-      <div class="ad-placeholder" aria-hidden="true"></div>
-
       <!-- Back button -->
       <div style="padding:0.5rem 1rem 1.5rem;text-align:center;">
         <button class="btn-secondary" onclick="showView('home'); renderHome(); setHeaderShowHome(false);" aria-label="Back to home">
@@ -285,6 +273,11 @@
   <!-- Confetti canvas (full-page overlay, pointer-events: none) -->
   <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
+  <!-- Bottom ad bar (hidden by default; shown on non-home views when ads are enabled) -->
+  <div id="ad-bar" class="ad-bar" aria-hidden="true"></div>
+
+  <!-- env.js must load before data.js so ADS_ENABLED is defined in time -->
+  <script src="env.js"></script>
   <!-- Data first, then main script -->
   <script src="data.js"></script>
   <script src="script.js"></script>

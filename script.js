@@ -171,15 +171,17 @@ function showView(viewName) {
 }
 
 function startAdTimer(viewName) {
-  const placeholder = document.querySelector(`#view-${kebab(viewName)} .ad-placeholder`);
-  if (!placeholder) return;
-  placeholder.classList.remove("visible");
+  const bar = document.getElementById("ad-bar");
+  if (!bar) return;
+  bar.classList.remove("visible");
+  document.body.classList.remove("ad-visible");
   const delay = ADSENSE_CONFIG.delaySeconds * 1000;
   adTimer = setTimeout(() => {
-    placeholder.classList.add("visible");
+    bar.classList.add("visible");
+    document.body.classList.add("ad-visible");
     // Trigger AdSense fill when the slot becomes visible
     if (ADSENSE_CONFIG.enabled) {
-      const ins = placeholder.querySelector("ins.adsbygoogle");
+      const ins = bar.querySelector("ins.adsbygoogle");
       if (ins && !ins.dataset.adsbygoogleStatus) {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
@@ -188,8 +190,9 @@ function startAdTimer(viewName) {
 }
 
 function hideAdPlaceholder(viewName) {
-  const placeholder = document.querySelector(`#view-${kebab(viewName)} .ad-placeholder`);
-  if (placeholder) placeholder.classList.remove("visible");
+  const bar = document.getElementById("ad-bar");
+  if (bar) bar.classList.remove("visible");
+  document.body.classList.remove("ad-visible");
 }
 
 /**
@@ -208,26 +211,17 @@ function initAdsense() {
   script.crossOrigin = "anonymous";
   document.head.appendChild(script);
 
-  // Map each view name to its HTML element ID and configured slot ID
-  const slotMap = {
-    module:    { viewId: "view-module",     slot: ADSENSE_CONFIG.slots.module },
-    miniGames: { viewId: "view-mini-games", slot: ADSENSE_CONFIG.slots.miniGames },
-    gamePlay:  { viewId: "view-game-play",  slot: ADSENSE_CONFIG.slots.gamePlay },
-    rewards:   { viewId: "view-rewards",    slot: ADSENSE_CONFIG.slots.rewards }
-  };
-
-  Object.values(slotMap).forEach(({ viewId, slot }) => {
-    if (!slot) return;
-    const container = document.querySelector(`#${viewId} .ad-placeholder`);
-    if (!container) return;
-    container.innerHTML =
+  // Insert a single <ins> tag into the bottom ad bar
+  const bar = document.getElementById("ad-bar");
+  if (bar && ADSENSE_CONFIG.slots.banner) {
+    bar.innerHTML =
       `<ins class="adsbygoogle"` +
       ` style="display:block"` +
       ` data-ad-client="${ADSENSE_CONFIG.publisherId}"` +
-      ` data-ad-slot="${slot}"` +
+      ` data-ad-slot="${ADSENSE_CONFIG.slots.banner}"` +
       ` data-ad-format="auto"` +
       ` data-full-width-responsive="true"></ins>`;
-  });
+  }
 }
 
 function kebab(str) {
